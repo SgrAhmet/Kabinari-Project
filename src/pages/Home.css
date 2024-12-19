@@ -1,0 +1,11 @@
+option{
+    color: red;
+    border: none;
+    padding: 10;
+}
+
+select{
+    /* color: lightblue; */
+    padding: 10;
+    border: none;
+}

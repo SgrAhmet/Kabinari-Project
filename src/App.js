@@ -1,19 +1,25 @@
 import './App.css';
-import MyButton from './components/MyButton';
-
+//  import MyButton from './components/MyButton';
+import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Settings from './pages/Settings';
 
 
 
 function App() {
 
   return (
-    <div className="App">
+    <>
 
-      {/* <MyButton name={"ahmet"} consoleLog={"Ahmete Basıldı"}/> */}
-      <MyButton name={"hakan"} consoleLog={"hakana Basıldı"}/>
-      {/* <MyButton name={"nevtaz"} consoleLog={"nevtaza Basıldı"}/> */}
-     
-    </div>
+ <Router>
+
+   <Routes>
+     <Route path="/" element={<Home/>} />
+     <Route path="/settings" element={<Settings/>} />  
+   </Routes>
+ </Router>
+
+    </>
   );
 }
 
