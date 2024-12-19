@@ -1,11 +1,62 @@
-option{
-    color: red;
-    border: none;
-    padding: 10;
+/* ! Renkler */
+/* rgb(227, 28, 60) Kırmızı */
+/* rgb(28, 57, 96) Mavi */
+/* rgb(48, 49, 53) Siyah */
+
+.HomeContainer{
+    /* background-color: red; */
+    /* border: 5px solid blue; */
+    /* height: 100vh; */
+}
+.sideBar{
+    background-color: rgb(69, 78, 89);
+    /* border: 5px solid blue; */
+    height: 100vh;
+    width: 12vw;
+    min-width: 120px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    /* justify-content: center; */
 }
 
-select{
-    /* color: lightblue; */
-    padding: 10;
-    border: none;
+.sideBar img {
+    /* border: 1px solid red; */
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+}
+.sideBar p {
+   font-size: 18px;
+   font-weight: bold;
+   /* background-color: black; */
+   padding: 20px;
+   text-align: center;
+}
+.sideBar p:hover {
+    color: rgb(227, 28, 60);
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.formArea{
+    /* padding: 102; */
+    background-color: red;
+    width: 100vw;
+    /* height: 20vh; */
+    /* display: flex; */
 }
