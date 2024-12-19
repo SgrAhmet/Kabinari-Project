@@ -18,8 +18,7 @@ const MyButton = ({name,consoleLog}) => {
         aria-describedby="passwordHelpBlock"
       />
       <Form.Text id="passwordHelpBlock" muted>
-        Your password must be 8-20 characters long, contain letters and numbers,
-        and must not contain spaces, special characters, or emoji.
+        please Enter Password
       </Form.Text>
 
 <Button as="a" variant="success">
