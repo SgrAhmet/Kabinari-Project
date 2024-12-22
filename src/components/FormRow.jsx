@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { AiOutlineClose  } from "react-icons/ai";
 
-const FormRow = ({ id, data, updateFormData }) => {
+const FormRow = ({ id, data, updateFormData, deleteFormRow }) => {
   const [formData, setFormData] = useState({
     kat: data.kat || "",
     tip: data.tip || "",
@@ -20,7 +21,7 @@ const FormRow = ({ id, data, updateFormData }) => {
 
   useEffect(() => {
     updateFormData(id, formData);
-  }, [formData]); // `formData` değiştiğinde `Home`'a bildir
+  }, [formData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,9 +31,14 @@ const FormRow = ({ id, data, updateFormData }) => {
     }));
   };
 
+  const deleteForm = () => {
+    deleteFormRow(id); // `deleteFormRow`'u çağır
+  };
+
   return (
     <div className="formArea">
-      <p>Form {id + 1}</p>
+      <AiOutlineClose onClick={deleteForm} className="deteleIcon"/>
+      <p>{id + 1}</p>
       <input
         placeholder="Kat"
         type="text"

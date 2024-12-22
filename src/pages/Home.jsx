@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import FormRow from "../components/FormRow";
 
@@ -31,6 +31,16 @@ const Home = () => {
     });
   };
 
+  const deleteFormRow = (rowId) => {
+    setRows((prevRows) => prevRows.filter((row) => row !== rowId)); // Seçilen satırı sil
+    setFormDataList((prevData) => prevData.filter((_, index) => index !== rowId)); // Aynı index'teki veriyi sil
+  };
+
+  useEffect(() => {
+    console.log("Rows:", rows);
+    console.log("Form Data List:", formDataList);
+  }, [rows, formDataList]);
+
   return (
     <div className="HomeContainer">
       {rows.map((id) => (
@@ -39,6 +49,7 @@ const Home = () => {
           id={id}
           data={formDataList[id] || {}}
           updateFormData={updateFormData}
+          deleteFormRow={deleteFormRow}
         />
       ))}
 
