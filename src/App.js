@@ -7,6 +7,7 @@ import {
   Routes,
 } from "react-router-dom";
 import Home from "./pages/Home";
+import Style1 from "./pages/Style1";
 import Settings from "./pages/Settings";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/style1" element={<Style1 />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>

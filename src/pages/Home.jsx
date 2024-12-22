@@ -34,6 +34,7 @@ const Home = () => {
   const deleteFormRow = (rowId) => {
     setRows((prevRows) => prevRows.filter((row) => row !== rowId)); // Seçilen satırı sil
     setFormDataList((prevData) => prevData.filter((_, index) => index !== rowId)); // Aynı index'teki veriyi sil
+    
   };
 
   useEffect(() => {
