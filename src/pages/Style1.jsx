@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { ThemeProvider, createTheme, Button, Box } from "@mui/material";
+import { ThemeProvider, createTheme, Button, Box, ToggleButton, TextField,Typography  } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
 import { Home, Receipt, People, Report, Settings,Delete } from "@mui/icons-material";
 const Style1 = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [selected, setSelected] = useState(false)
 
   const theme = createTheme({
     palette: {
@@ -13,6 +15,17 @@ const Style1 = () => {
       },
     },
   });
+
+  let deneme =[]
+
+  for (let i = 0; i < 5; i++) {
+    deneme.push(<TextField id="outlined-basic" label="Mahal-No" variant="outlined"
+    sx={{
+      width:"150px"
+    }}
+    />)
+    
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,7 +44,9 @@ const Style1 = () => {
           sx={{
             // backgroundColor:"red",
             fontFamily:"inherit",
-            fontWeight:"500"
+            fontWeight:"500",
+            // transform: "rotate(270deg)",
+            
           }}
           size="large" 
           startIcon={<DeleteIcon />}
@@ -40,6 +55,19 @@ const Style1 = () => {
         >
           Tema Değiştir
         </Button>
+
+          <Typography variant="h4" color={isDarkMode ? "#b9b9b9" : "#333"}> deneme </Typography>
+        <ToggleButton
+        color="primary"
+      value="check"
+      selected={selected}
+      onChange={() => setSelected((prevSelected) => !prevSelected)}
+    >
+      <CheckIcon />
+    </ToggleButton>
+
+    {/* <TextField id="outlined-basic" label="Mahal-No" variant="outlined" /> */}
+    {deneme}
       </Box>
     </ThemeProvider>
   );
