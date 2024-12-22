@@ -7,6 +7,8 @@
     /* background-color: red; */
     /* border: 5px solid blue; */
     /* height: 100vh; */
+    /* background-color: rgb(48, 51, 54); */
+
 }
 .sideBar{
     background-color: rgb(69, 78, 89);
@@ -54,9 +56,34 @@
 
 
 .formArea{
-    /* padding: 102; */
-    background-color: red;
-    width: 100vw;
-    /* height: 20vh; */
-    /* display: flex; */
+    padding: 10px;
+    background-color: rgb(28, 57, 96);
+    width: 95vw;
+    height: 8vh;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+}
+
+.formArea input{
+    width: 8%;
+    border-radius: 5px;
+    border: none;
+    height: 60%;
+
+}
+.formArea select{
+    width: 5%;
+    height: 60%;
+    border-radius: 5px;
+    border: none;
+}
+.formArea p {
+    color:rgb(227, 28, 60) ;
+    font-size: 30px;
+    margin-top: 1%;
 }
