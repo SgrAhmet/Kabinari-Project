@@ -28,6 +28,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SideBar from "../components/SideBar";
 import Navbar from "../components/Navbar";
+import StyleFormRow from "../components/StyleFormRow";
 
 const Style1 = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -92,13 +93,16 @@ const Style1 = () => {
               borderRadius: "20px",
               height: "80vh",
               margin: "10px",
-              marginX: "30px",
-              boxShadow: 1,
+              marginX: "50px",
+              // boxShadow: 1,
+              boxShadow:
+                "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px",
             }}
           >
             <Box
               sx={{
                 display: "flex",
+                alignItems:"center",
                 flexDirection: "row",
                 margin: "30px",
                 justifyContent: "space-between",
@@ -110,7 +114,7 @@ const Style1 = () => {
                   flexDirection: "row",
                 }}
               >
-                <Person sx={{ fontSize: "48px", color: "#A19D95" }} />
+                <Person sx={{ fontSize: "36px", color: "#A19D95" }} />
                 <Typography
                   color="#A19D95"
                   fontSize={24}
@@ -129,6 +133,7 @@ const Style1 = () => {
                 sx={{ width: "60%" }}
                 id="outlined-basic"
                 variant="outlined"
+                size="small"
               />
               <Button
                 sx={{ backgroundColor: "#665B59", height: "80%" }}
@@ -154,9 +159,10 @@ const Style1 = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
+                  alignItems:"center"
                 }}
               >
-                <Assessment sx={{ fontSize: "48px", color: "#A19D95" }} />
+                <Assessment sx={{ fontSize: "36px", color: "#A19D95" }} />
                 <Typography
                   color="#A19D95"
                   fontSize={24}
@@ -175,6 +181,7 @@ const Style1 = () => {
                 sx={{ width: "60%" }}
                 id="outlined-basic"
                 variant="outlined"
+                size="small"
               />
 
               <Box height={"50px"} width={"95px"}></Box>
@@ -192,9 +199,10 @@ const Style1 = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
+                  alignItems:"center"
                 }}
               >
-                <CalendarMonth sx={{ fontSize: "48px", color: "#A19D95" }} />
+                <CalendarMonth sx={{ fontSize: "36px", color: "#A19D95" }} />
                 <Typography
                   color="#A19D95"
                   fontSize={24}
@@ -212,7 +220,9 @@ const Style1 = () => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   sx={{ width: "60%" }}
-                  label="Oluşturma Tarihi"
+                slotProps={{ textField: { size: 'small' } }}
+                  
+                  // label="Oluşturma Tarihi"
                   // value={value}
                   // onChange={(newValue) => setValue(newValue)}
                 />
@@ -224,6 +234,18 @@ const Style1 = () => {
             <Divider
               sx={{ borderBottomWidth: 3, backgroundColor: "#DEDDDB" }}
             />
+
+                <Box sx={{
+                  width:"100%",
+                  border:"3px solid black"
+                }}>
+
+            <StyleFormRow />
+            <StyleFormRow />
+            <StyleFormRow />
+            </Box>
+
+
           </Box>
         </Box>
       </Box>
