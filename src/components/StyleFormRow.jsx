@@ -1,31 +1,21 @@
 import React from "react";
 import {
-  ThemeProvider,
-  createTheme,
-  Button,
-  Box,
-  Divider,
-  ToggleButton,
   TextField,
-  Typography,
-  Drawer,
-  Paper,
+  Box,
+  FormControl,
+  InputLabel,
   Select,
   MenuItem,
-  InputLabel,
-  FormControl,
+  Typography,
+  Button
 } from "@mui/material";
-import {
-  Person,
-  CalendarMonth,
-  Assessment,
-  People,
-  Report,
-  Settings,
-  Delete,
-} from "@mui/icons-material";
-const StyleFormRow = () => {
-  let items = [];
+
+const StyleFormRow = ({id}) => {
+
+  let items = [  <Button sx={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px',bgcolor:"#394c64"}} variant="contained">
+  {id}
+</Button>];
+
   const textFieldLabelNames = [
     "Kat",
     "Tip",
@@ -33,52 +23,68 @@ const StyleFormRow = () => {
     "Mahal",
     "En",
     "Boy",
-    "Duvar Kalınlığı",
+    "D.K.",
     "Kanat",
     "Kasa",
     "Kilit",
   ];
   const selectLabelNames = ["Yön", "Barel", "Cumba", "Kol"];
   const selectLabelOptions = [
-    <>
-      
-      <MenuItem value={10}>Sağ</MenuItem>
-      <MenuItem value={20}>Sol</MenuItem>
-      <MenuItem value={30}>Dışarı Sağ</MenuItem>
-      <MenuItem value={30}>Dışarı Sol</MenuItem>
-    </>,
-      <>
-   
-      <MenuItem value={10}>?1</MenuItem>
-      <MenuItem value={20}>?2</MenuItem>
-      <MenuItem value={30}>?3</MenuItem>
-    </>,
-      <>
-   
-      <MenuItem value={10}>PVC</MenuItem>
-      <MenuItem value={20}>U</MenuItem>
-
-    </>,
-      <>
-    
-      <MenuItem value={10}>Baston</MenuItem>
-      <MenuItem value={20}>Boru</MenuItem>
-    </>,
+    [
+      <MenuItem key="sağ" value="sağ">
+        Sağ
+      </MenuItem>,
+      <MenuItem key="sol" value="sol">
+        Sol
+      </MenuItem>,
+      <MenuItem key="dışarı-sağ" value="dışarı-sağ">
+        D. Sağ
+      </MenuItem>,
+      <MenuItem key="dışarı-sol" value="dışarı-sol">
+        D. Sol
+      </MenuItem>,
+    ],
+    [
+      <MenuItem key="?1" value="?1">
+        ?1
+      </MenuItem>,
+      <MenuItem key="?2" value="?2">
+        ?2
+      </MenuItem>,
+      <MenuItem key="?3" value="?3">
+        ?3
+      </MenuItem>,
+    ],
+    [
+      <MenuItem key="pvc" value="pvc">
+        PVC
+      </MenuItem>,
+      <MenuItem key="u" value="u">
+        U
+      </MenuItem>,
+    ],
+    [
+      <MenuItem key="baston" value="baston">
+        Baston
+      </MenuItem>,
+      <MenuItem key="boru" value="boru">
+        Boru
+      </MenuItem>,
+    ],
   ];
 
   for (let i = 0; i < 9; i++) {
     items.push(
       <TextField
-        sx={{ width: "8%" }}
-        // InputProps={{ sx: { borderRadius: 0 } }}
+        key={`textfield-${i}`}
+        sx={{ width: i== 4 ||i==5 || i==6 ? "4%" : "8%"  }}
         size="small"
-        id="outlined-basic"
+        id={`outlined-basic-${i}`}
         variant="outlined"
         label={textFieldLabelNames[i]}
         InputLabelProps={{
           sx: {
-            fontSize: "12px",
-            // textAlign:"center"
+            // fontSize: "12px",
           },
         }}
       />
@@ -88,19 +94,17 @@ const StyleFormRow = () => {
   for (let i = 0; i < 4; i++) {
     items.push(
       <FormControl
+        key={`select-${i}`}
         size="small"
         sx={{
           width: "8%",
         }}
       >
-        <InputLabel id={selectLabelNames[i]}>{selectLabelNames[i]}</InputLabel>
+        <InputLabel id={`select-label-${i}`}>{selectLabelNames[i]}</InputLabel>
         <Select
-          labelId={selectLabelNames[i]}
-          id={selectLabelNames[i]}
-          // value={age}
+          labelId={`select-label-${i}`}
+          id={`select-${i}`}
           label={selectLabelNames[i]}
-          size="small"
-          // onChange={handleChange}
         >
           {selectLabelOptions[i]}
         </Select>
@@ -111,17 +115,21 @@ const StyleFormRow = () => {
   return (
     <Box
       sx={{
-        bgcolor: "tomato",
+        // bgcolor: "#d0d0d0",
+        // boxShadow: " rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
         height: "50px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        marginTop: "10px",
+        // marginTop: "10px",
+        marginBottom:"10px",
+        // marginY:"10px",
+        // padding:"10px",
+        // borderBottom:"2px solid blue",
+        borderBottom:"2px solid #DEDDDB",
       }}
     >
       {items}
-
-
     </Box>
   );
 };

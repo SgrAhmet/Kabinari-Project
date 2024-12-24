@@ -64,7 +64,9 @@ const Style1 = () => {
         <Box
           sx={{
             backgroundColor: "#DEDDDB",
-            // height: "90%",
+            width: "100%",
+            minHeight: "90vh", 
+            
           }}
         >
           <Box
@@ -91,7 +93,7 @@ const Style1 = () => {
               border: "1px solid #FFFFFF",
               bgcolor: "#FFFFFF",
               borderRadius: "20px",
-              height: "80vh",
+              // height: "80vh",
               margin: "10px",
               marginX: "50px",
               // boxShadow: 1,
@@ -237,12 +239,16 @@ const Style1 = () => {
 
                 <Box sx={{
                   width:"100%",
-                  border:"3px solid black"
+                  // border:"3px solid black"
                 }}>
 
-            <StyleFormRow />
-            <StyleFormRow />
-            <StyleFormRow />
+            <StyleFormRow id={1} />
+            <StyleFormRow id={2} />
+            <StyleFormRow id={3} />
+            <StyleFormRow id={4} />
+            <StyleFormRow id={5} />
+            <StyleFormRow id={6} />
+
             </Box>
 
 
