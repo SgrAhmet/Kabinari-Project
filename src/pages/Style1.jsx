@@ -21,6 +21,7 @@ import {
   Report,
   Settings,
   Delete,
+  SensorDoor
 } from "@mui/icons-material";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

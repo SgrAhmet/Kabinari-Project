@@ -124,7 +124,7 @@ const StyleFormRow = ({id}) => {
         // marginTop: "10px",
         marginBottom:"10px",
         // marginY:"10px",
-        // padding:"10px",
+        paddingX:"10px",
         // borderBottom:"2px solid blue",
         borderBottom:"2px solid #DEDDDB",
       }}
