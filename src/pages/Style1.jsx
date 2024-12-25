@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   ThemeProvider,
   createTheme,
@@ -21,7 +21,7 @@ import {
   Report,
   Settings,
   Delete,
-  SensorDoor
+  SensorDoor,
 } from "@mui/icons-material";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -51,11 +51,53 @@ const Style1 = () => {
   };
   //  SideBar===============================
 
+  //! =================================================
+  const [formDataList, setFormDataList] = useState([]);
+  const [rows, setRows] = useState([0]);
+
+  const handleExelBtn = () => {
+    console.log("Form Verileri:", formDataList);
+  };
+
+  const handleNewRowBtn = () => {
+    setRows((prev) => [...prev, prev.length]); // Yeni boş satır ekler
+    setFormDataList((prev) => [...prev, {}]); // Yeni boş veri ekler
+  };
+
+  const handleSameRowBtn = () => {
+    if (formDataList.length === 0) return;
+
+    const lastRowData = formDataList[formDataList.length - 1]; // Son satırın verisi
+    setRows((prev) => [...prev, prev.length]); // Yeni satır ekle
+    setFormDataList((prev) => [...prev, { ...lastRowData }]); // Son satırın kopyasını ekle
+  };
+
+  const updateFormData = (id, data) => {
+    setFormDataList((prev) => {
+      const updatedData = [...prev];
+      updatedData[id] = data; // Belirtilen `id`deki veriyi günceller
+      return updatedData;
+    });
+  };
+
+  const deleteFormRow = (rowId) => {
+    setRows((prevRows) => prevRows.filter((row) => row !== rowId)); // Seçilen satırı sil
+    setFormDataList((prevData) => prevData.filter((_, index) => index !== rowId)); // Aynı index'teki veriyi sil
+    
+  };
+
+  useEffect(() => {
+    console.log("Rows:", rows);
+    console.log("Form Data List:", formDataList);
+  }, [rows, formDataList]);
+  //! =================================================
+
   return (
     <ThemeProvider theme={theme}>
       <Box
         sx={{
           // border:"2px solid tomato",
+          width: "100%",
           height: "100vh",
           // width:"100vw"
         }}
@@ -66,8 +108,7 @@ const Style1 = () => {
           sx={{
             backgroundColor: "#DEDDDB",
             width: "100%",
-            minHeight: "90vh", 
-            
+            minHeight: "90vh",
           }}
         >
           <Box
@@ -105,7 +146,7 @@ const Style1 = () => {
             <Box
               sx={{
                 display: "flex",
-                alignItems:"center",
+                alignItems: "center",
                 flexDirection: "row",
                 margin: "30px",
                 justifyContent: "space-between",
@@ -141,6 +182,7 @@ const Style1 = () => {
               <Button
                 sx={{ backgroundColor: "#665B59", height: "80%" }}
                 variant="contained"
+                onClick={handleExelBtn}
               >
                 Kaydet
               </Button>
@@ -162,7 +204,7 @@ const Style1 = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
-                  alignItems:"center"
+                  alignItems: "center",
                 }}
               >
                 <Assessment sx={{ fontSize: "36px", color: "#A19D95" }} />
@@ -202,18 +244,15 @@ const Style1 = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
-                  alignItems:"center"
+                  alignItems: "center",
                 }}
               >
                 <CalendarMonth sx={{ fontSize: "36px", color: "#A19D95" }} />
                 <Typography
                   color="#A19D95"
                   fontSize={24}
-                  // sx={{justifyContent:"center"}}
                   display={"flex"}
                   alignItems={"center"}
-                  // fontFamily={"unset"}
-                  // marginLeft={"30px"}
                   marginX={"10px"}
                 >
                   Oluşturma Tarihi
@@ -222,9 +261,10 @@ const Style1 = () => {
 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
+                  format="DD/MM/YYYY"
                   sx={{ width: "60%" }}
-                slotProps={{ textField: { size: 'small' } }}
-                  
+                  slotProps={{ textField: { size: "small" } }}
+
                   // label="Oluşturma Tarihi"
                   // value={value}
                   // onChange={(newValue) => setValue(newValue)}
@@ -238,21 +278,25 @@ const Style1 = () => {
               sx={{ borderBottomWidth: 3, backgroundColor: "#DEDDDB" }}
             />
 
-                <Box sx={{
-                  width:"100%",
-                  // border:"3px solid black"
-                }}>
-
-            <StyleFormRow id={1} />
-            <StyleFormRow id={2} />
-            <StyleFormRow id={3} />
-            <StyleFormRow id={4} />
-            <StyleFormRow id={5} />
-            <StyleFormRow id={6} />
-
+            <Box
+              sx={{
+                width: "100%",
+                // border:"3px solid black"
+              }}
+            >
+              {/* <StyleFormRow id={1} /> */}
+              {rows.map((id) => (
+        <StyleFormRow
+          key={id}
+          id={id}
+          data={formDataList[id] || {}}
+          updateFormData={updateFormData}
+          deleteFormRow={deleteFormRow}
+        />
+      ))}
             </Box>
-
-
+            <Button onClick={handleNewRowBtn} variant="contained">Yeni Satır</Button>
+            <Button onClick={handleSameRowBtn} variant="contained">Aynı Satır</Button>
           </Box>
         </Box>
       </Box>

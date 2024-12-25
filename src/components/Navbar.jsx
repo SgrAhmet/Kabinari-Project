@@ -65,7 +65,8 @@ const Navbar = ({toggleDrawer}) => {
                 height:"70%",
                 margin:"5px"
             }}>
-            <img style={{height:"100%",width:"100%"}} src={logo} alt="Kabinari" srcset="" />
+              <a href="http://www.kabinari.com/" target="_blank"><img style={{height:"100%",width:"100%"}} src={logo} alt="Kabinari" srcset="" /></a>
+            
 
             </Box>
 

@@ -13,7 +13,7 @@ import {
 const StyleFormRow = ({id}) => {
 
   let items = [  <Button sx={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px',bgcolor:"#394c64"}} variant="contained">
-  {id}
+  {id + 1}
 </Button>];
 
   const textFieldLabelNames = [
