@@ -12,7 +12,7 @@ import {
   Task
 } from "@mui/icons-material";
 import logo from "../imgs/logo2.png"
-
+import { Link } from "react-router-dom";
 const SideBar = ({open,toggleDrawer}) => {
 
     const DrawerList = (
@@ -46,6 +46,7 @@ const SideBar = ({open,toggleDrawer}) => {
               </ListItem>
             ))}
           </List>
+          <Link to="/firebase">Firebase</Link>
         </Box>
       );
   return (
