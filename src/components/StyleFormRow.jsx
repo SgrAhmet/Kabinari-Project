@@ -17,7 +17,7 @@ import {
 const StyleFormRow = ({id}) => {
   const [selected, setSelected] = React.useState(false);
 
-  let items = [  <Button sx={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px',bgcolor:"#394c64"}} variant="contained">
+  let items = [  <Button sx={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px',bgcolor:"#394c64",marginX:"10px"}} variant="contained">
   {id + 1}
 </Button>];
 
@@ -119,6 +119,7 @@ const StyleFormRow = ({id}) => {
 
   for (let i = 0; i < 6; i++) {
     items.push(    <ToggleButton
+      size="small"
       value="check"
       selected={selected}
       onChange={() => setSelected((prevSelected) => !prevSelected)}
@@ -143,6 +144,7 @@ const StyleFormRow = ({id}) => {
         paddingX:"10px",
         // borderBottom:"2px solid blue",
         borderBottom:"2px solid #DEDDDB",
+        // gap:"1px"
       }}
     >
       {items}
