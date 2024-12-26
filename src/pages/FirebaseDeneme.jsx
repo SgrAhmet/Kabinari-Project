@@ -27,6 +27,7 @@ import {
 
 const FirebaseDeneme = () => {
   const [veri1, setVeri1] = useState();
+  
 
   // const [veri1Input, setVeri1Input] = useState()
 
@@ -49,13 +50,16 @@ const FirebaseDeneme = () => {
     fetchData();
   }, []);
 
+  const data = {
+    kaçgündeögrenirim : "30 gün",
+    kimsoruyo:"Hakan"
+  };
+  
   const addNewOrder = async () => {
     try {
       const ordersCollectionRef = collection(db, "Deneme");
 
-      await addDoc(ordersCollectionRef, {
-        veri1: veri1,
-      });
+      await addDoc(ordersCollectionRef, data)
 
       fetchData();
     } catch (error) {
@@ -64,6 +68,7 @@ const FirebaseDeneme = () => {
   };
 
 
+  
   const handleInputChange =(e)=>{
     // console.log(e.target.value)
     setVeri1(e.target.value)

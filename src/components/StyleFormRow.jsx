@@ -7,10 +7,15 @@ import {
   Select,
   MenuItem,
   Typography,
-  Button
+  Button,
+  ToggleButton
 } from "@mui/material";
+import {
+  Check,
+} from "@mui/icons-material";
 
 const StyleFormRow = ({id}) => {
+  const [selected, setSelected] = React.useState(false);
 
   let items = [  <Button sx={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px',bgcolor:"#394c64"}} variant="contained">
   {id + 1}
@@ -77,7 +82,7 @@ const StyleFormRow = ({id}) => {
     items.push(
       <TextField
         key={`textfield-${i}`}
-        sx={{ width: i== 4 ||i==5 || i==6 ? "4%" : "8%"  }}
+        sx={{ width: i== 4 ||i==5 || i==6 || i == 0 || i == 1 ? "4%" : "8%"  }}
         size="small"
         id={`outlined-basic-${i}`}
         variant="outlined"
@@ -112,6 +117,17 @@ const StyleFormRow = ({id}) => {
     );
   }
 
+  for (let i = 0; i < 6; i++) {
+    items.push(    <ToggleButton
+      value="check"
+      selected={selected}
+      onChange={() => setSelected((prevSelected) => !prevSelected)}
+    >
+      <Check />
+    </ToggleButton>)
+    
+  }
+
   return (
     <Box
       sx={{
@@ -130,6 +146,7 @@ const StyleFormRow = ({id}) => {
       }}
     >
       {items}
+
     </Box>
   );
 };

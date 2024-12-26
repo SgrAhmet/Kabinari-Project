@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ThemeProvider,
   createTheme,
@@ -82,8 +82,9 @@ const Style1 = () => {
 
   const deleteFormRow = (rowId) => {
     setRows((prevRows) => prevRows.filter((row) => row !== rowId)); // Seçilen satırı sil
-    setFormDataList((prevData) => prevData.filter((_, index) => index !== rowId)); // Aynı index'teki veriyi sil
-    
+    setFormDataList((prevData) =>
+      prevData.filter((_, index) => index !== rowId)
+    ); // Aynı index'teki veriyi sil
   };
 
   useEffect(() => {
@@ -136,8 +137,8 @@ const Style1 = () => {
               bgcolor: "#FFFFFF",
               borderRadius: "20px",
               // height: "80vh",
-              margin: "10px",
-              marginX: "50px",
+              // margin: "10px",
+              marginX: "20px",
               // boxShadow: 1,
               boxShadow:
                 "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px",
@@ -286,17 +287,25 @@ const Style1 = () => {
             >
               {/* <StyleFormRow id={1} /> */}
               {rows.map((id) => (
-        <StyleFormRow
-          key={id}
-          id={id}
-          data={formDataList[id] || {}}
-          updateFormData={updateFormData}
-          deleteFormRow={deleteFormRow}
-        />
-      ))}
+                <StyleFormRow
+                  key={id}
+                  id={id}
+                  data={formDataList[id] || {}}
+                  updateFormData={updateFormData}
+                  deleteFormRow={deleteFormRow}
+                />
+              ))}
             </Box>
-            <Button onClick={handleNewRowBtn} variant="contained">Yeni Satır</Button>
-            <Button onClick={handleSameRowBtn} variant="contained">Aynı Satır</Button>
+
+            <Box sx={{ padding:"20px",display:"flex",gap:"10px"}}>
+            <Button onClick={handleNewRowBtn} variant="contained">
+              Yeni Satır
+            </Button>
+            <Button onClick={handleSameRowBtn} variant="contained">
+              Aynı Satır
+            </Button>
+            </Box>
+         
           </Box>
         </Box>
       </Box>
