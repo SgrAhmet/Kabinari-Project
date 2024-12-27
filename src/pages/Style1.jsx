@@ -30,6 +30,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SideBar from "../components/SideBar";
 import Navbar from "../components/Navbar";
 import StyleFormRow from "../components/StyleFormRow";
+import NameRow from "../components/NameRow";
 
 const Style1 = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -41,6 +42,10 @@ const Style1 = () => {
       primary: {
         main: isDarkMode ? "#BB86FC" : "#1976D2",
       },
+      secondary:{
+        main:"#0c9d0c",
+        
+      }
     },
   });
 
@@ -279,6 +284,8 @@ const Style1 = () => {
               sx={{ borderBottomWidth: 3, backgroundColor: "#DEDDDB" }}
             />
 
+
+              {/* <NameRow/> */}
             <Box
               sx={{
                 width: "100%",

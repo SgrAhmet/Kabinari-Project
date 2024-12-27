@@ -6,20 +6,54 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Typography,
   Button,
-  ToggleButton
+  // ToggleButton,
+  Checkbox
 } from "@mui/material";
-import {
-  Check,
-} from "@mui/icons-material";
+import { Check } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
+import MuiToggleButton from "@mui/material/ToggleButton";
+import NameRow from "./NameRow";
 
-const StyleFormRow = ({id}) => {
-  const [selected, setSelected] = React.useState(false);
+const StyleFormRow = ({ id }) => {
 
-  let items = [  <Button sx={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px',bgcolor:"#394c64",marginX:"10px"}} variant="contained">
-  {id + 1}
-</Button>];
+
+  const ToggleButton = styled(MuiToggleButton)({
+    "&.Mui-selected": {
+      color: "white",
+      backgroundColor: '#264f84'
+    },
+    "&.Mui-selected:hover":{
+      backgroundColor: '#264f84dd'
+    }
+  });
+
+  const [selectedStates, setSelectedStates] = React.useState(
+    Array(6).fill(false) 
+  );
+
+  const handleToggle = (index) => {
+    setSelectedStates((prevStates) =>
+      prevStates.map((state, i) => (i === index ? !state : state))
+    );
+  };
+
+  let items = [
+    <Button
+      key="button-id"
+      sx={{
+        maxWidth: "30px",
+        maxHeight: "30px",
+        minWidth: "30px",
+        minHeight: "30px",
+        bgcolor: "#394c64",
+        marginRight: "5px",
+      }}
+      variant="contained"
+    >
+      {id + 1}
+    </Button>,
+  ];
 
   const textFieldLabelNames = [
     "Kat",
@@ -79,10 +113,19 @@ const StyleFormRow = ({id}) => {
   ];
 
   for (let i = 0; i < 9; i++) {
+
+    // if (id==0) {
+      
+    // }
+
     items.push(
+<>
       <TextField
         key={`textfield-${i}`}
-        sx={{ width: i== 4 ||i==5 || i==6 || i == 0 || i == 1 ? "4%" : "8%"  }}
+        sx={{
+          width: i == 4 || i == 5 || i == 6 || i == 0 || i == 1 ? "4%" : "8%",
+          position:"relative"
+        }}
         size="small"
         id={`outlined-basic-${i}`}
         variant="outlined"
@@ -92,7 +135,10 @@ const StyleFormRow = ({id}) => {
             // fontSize: "12px",
           },
         }}
+
       />
+      
+  </>
     );
   }
 
@@ -118,37 +164,38 @@ const StyleFormRow = ({id}) => {
   }
 
   for (let i = 0; i < 6; i++) {
-    items.push(    <ToggleButton
-      size="small"
-      value="check"
-      selected={selected}
-      onChange={() => setSelected((prevSelected) => !prevSelected)}
-    >
-      <Check />
-    </ToggleButton>)
-    
+    items.push(
+      <ToggleButton
+        key={`toggle-${i}`}
+        size="small"
+        value="check"
+        // color="error"
+        selected={selectedStates[i]}
+        onChange={() => handleToggle(i)}
+        sx={{
+          // bgcolor:"red",
+        //   ":hover":{bgcolor:"blue"},
+        }}
+      >
+        <Check />
+      </ToggleButton>
+      // <Checkbox defaultChecked size="large" />
+    );
   }
 
   return (
     <Box
       sx={{
-        // bgcolor: "#d0d0d0",
-        // boxShadow: " rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
         height: "50px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        // marginTop: "10px",
-        marginBottom:"10px",
-        // marginY:"10px",
-        paddingX:"10px",
-        // borderBottom:"2px solid blue",
-        borderBottom:"2px solid #DEDDDB",
-        // gap:"1px"
+        marginBottom: "10px",
+        paddingX: "5px",
+        borderBottom: "2px solid #DEDDDB",
       }}
     >
       {items}
-
     </Box>
   );
 };
