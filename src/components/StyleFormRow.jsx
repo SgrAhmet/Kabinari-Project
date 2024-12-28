@@ -17,11 +17,33 @@ import NameRow from "./NameRow";
 
 const StyleFormRow = ({ id }) => {
 
+  // const [formData, setFormData] = useState({
+  //   kat: data?.kat || "",
+  //   tip: data?.tip || "",
+  //   mahalNo: data?.mahalNo || "",
+  //   mahal: data?.mahal || "",
+  //   en: data?.en || "",
+  //   boy: data?.boy || "",
+  //   duvarKalinligi: data?.duvarKalinligi || "",
+  //   yon: data?.yon || "",
+  //   kanat: data?.kanat || "",
+  //   kasa: data?.kasa || "",
+  //   barel: data?.barel || "",
+  //   kilit: data?.kilit || "",
+  //   cumba: data?.cumba || "",
+  //   kol: data?.kol || "",
+  //   tekmelik: false,
+  //   itmelik: false,
+  //   menfez: false,
+  //   hidrolik: false,
+  //   lumboz: false,
+  //   yangınaD: false,
+  // });
+
 
   const ToggleButton = styled(MuiToggleButton)({
     "&.Mui-selected": {
       color: "white",
-      backgroundColor: '#264f84'
     },
     "&.Mui-selected:hover":{
       backgroundColor: '#264f84dd'
