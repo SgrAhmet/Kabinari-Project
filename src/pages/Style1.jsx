@@ -30,11 +30,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SideBar from "../components/SideBar";
 import Navbar from "../components/Navbar";
 import StyleFormRow from "../components/StyleFormRow";
-import NameRow from "../components/NameRow";
+import DynamicForm from "../components/DynamicForm";
 
 const Style1 = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [selected, setSelected] = useState(false);
+
+  const [müsteriIsmi, setmüsteriIsmi] = useState("")
 
   const theme = createTheme({
     palette: {
@@ -57,45 +59,52 @@ const Style1 = () => {
   //  SideBar===============================
 
   //! =================================================
+  const handleRowChange = (id, updatedData) => {
+    setFormDataList((prevList) => {
+      const newList = [...prevList];
+      newList[id] = updatedData; // İlgili ID'ye sahip satırın verisini güncelle.
+      return newList;
+    });
+  };
+
   const [formDataList, setFormDataList] = useState([]);
-  const [rows, setRows] = useState([0]);
+  const [newRows, setNewRows] = useState([
+    <StyleFormRow key={0} id={0} onChange={handleRowChange} />,
+  ]);
+
+
 
   const handleExelBtn = () => {
     console.log("Form Verileri:", formDataList);
   };
 
   const handleNewRowBtn = () => {
-    setRows((prev) => [...prev, prev.length]); // Yeni boş satır ekler
-    setFormDataList((prev) => [...prev, {}]); // Yeni boş veri ekler
+    setNewRows((oldArray) => [
+      ...oldArray,
+      <StyleFormRow
+        key={newRows.length}
+        id={newRows.length}
+        onChange={handleRowChange}
+      />,
+    ]);
+    setFormDataList((prevList) => [...prevList, {}]); // Yeni satır için boş bir nesne ekle.
   };
 
   const handleSameRowBtn = () => {
-    if (formDataList.length === 0) return;
-
-    const lastRowData = formDataList[formDataList.length - 1]; // Son satırın verisi
-    setRows((prev) => [...prev, prev.length]); // Yeni satır ekle
-    setFormDataList((prev) => [...prev, { ...lastRowData }]); // Son satırın kopyasını ekle
+    const lastRowData =
+      formDataList[formDataList.length - 1] || {}; // Son satırın verisini al.
+    setNewRows((oldArray) => [
+      ...oldArray,
+      <StyleFormRow
+        key={newRows.length}
+        id={newRows.length}
+        data={lastRowData}
+        onChange={handleRowChange}
+      />,
+    ]);
+    setFormDataList((prevList) => [...prevList, lastRowData]); // Yeni satıra son satırın verilerini ekle.
   };
 
-  const updateFormData = (id, data) => {
-    setFormDataList((prev) => {
-      const updatedData = [...prev];
-      updatedData[id] = data; // Belirtilen `id`deki veriyi günceller
-      return updatedData;
-    });
-  };
-
-  const deleteFormRow = (rowId) => {
-    setRows((prevRows) => prevRows.filter((row) => row !== rowId)); // Seçilen satırı sil
-    setFormDataList((prevData) =>
-      prevData.filter((_, index) => index !== rowId)
-    ); // Aynı index'teki veriyi sil
-  };
-
-  useEffect(() => {
-    console.log("Rows:", rows);
-    console.log("Form Data List:", formDataList);
-  }, [rows, formDataList]);
   //! =================================================
 
   return (
@@ -184,6 +193,10 @@ const Style1 = () => {
                 id="outlined-basic"
                 variant="outlined"
                 size="small"
+                value={müsteriIsmi}
+                onChange={(e) => {
+                  setmüsteriIsmi(e.target.value);
+                }}
               />
               <Button
                 sx={{ backgroundColor: "#665B59", height: "80%" }}
@@ -293,15 +306,16 @@ const Style1 = () => {
               }}
             >
               {/* <StyleFormRow id={1} /> */}
-              {rows.map((id) => (
+              {/* {rows.map((id) => (
                 <StyleFormRow
                   key={id}
                   id={id}
-                  data={formDataList[id] || {}}
-                  updateFormData={updateFormData}
-                  deleteFormRow={deleteFormRow}
+                  data={{kat : "ahmet"}}
                 />
-              ))}
+              ))} */}
+
+              {/* {newRows} */}
+              <DynamicForm müsteriIsmi={müsteriIsmi}/>
             </Box>
 
             <Box sx={{ padding:"20px",display:"flex",gap:"10px"}}>
