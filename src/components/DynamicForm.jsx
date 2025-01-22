@@ -160,7 +160,6 @@ const DynamicForm = ({müsteriIsmi}) => {
           <Controller
             name={`mahal-${row.id}`}
             control={control}
-            defaultValue="deneme"
             render={({ field }) => (
               <TextField
                 {...field}
