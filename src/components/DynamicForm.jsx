@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import SendIcon from "@mui/icons-material/Send";
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 import DownloadData from "./DownloadData";
 
@@ -390,14 +391,26 @@ const DynamicForm = ({müsteriIsmi}) => {
         </Button>
         <Button
           variant="contained"
+          // type="submit"
+          startIcon={<CloudDownloadIcon />}
+          sx={{
+            backgroundColor: "#dad726",
+            "&:hover": { backgroundColor: "#cac727" },
+          }}
+        >
+          BULUTA YÜKLE
+        </Button>
+
+        <Button
+          variant="contained"
           type="submit"
-          startIcon={<SendIcon />}
+          startIcon={<DownloadForOfflineIcon />}
           sx={{
             backgroundColor: "#FF5722",
             "&:hover": { backgroundColor: "#e64a19" },
           }}
         >
-          Gönder
+          KAYDET
         </Button>
       </Box>
     </Box>
