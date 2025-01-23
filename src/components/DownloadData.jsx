@@ -11,7 +11,7 @@ const DownloadData = (data, müsteriIsmi) => {
     );
     worksheet.pageSetup = {
       paperSize: 9, // A4
-      orientation: "portrait", // Dikey
+      orientation: "landscape", // Yatay
       fitToPage: true, // Sayfaya sığdır
       fitToWidth: 1, // Genişlikte 1 sayfaya sığdır
       fitToHeight: 1, // Yükseklikte 1 sayfaya sığdır
@@ -26,9 +26,9 @@ const DownloadData = (data, müsteriIsmi) => {
     };
 
     // Tablo Başlığı (Örneğin AVE İNŞAAT PROJE gibi)
-    worksheet.mergeCells("A1:T1"); // Hücreleri birleştir
+    worksheet.mergeCells("A1:V1"); // Hücreleri birleştir
     const titleRow = worksheet.getRow(1);
-    titleRow.getCell(1).value = müsteriIsmi === "" ? "Project1" : müsteriIsmi; // Tablo Başlığı
+    titleRow.getCell(1).value = müsteriIsmi === "" ? "Project" : müsteriIsmi; // Tablo Başlığı
     titleRow.getCell(1).font = { bold: true, size: 16 };
     titleRow.getCell(1).alignment = {
       vertical: "middle",
@@ -44,15 +44,15 @@ const DownloadData = (data, müsteriIsmi) => {
 
     worksheet.mergeCells("A2:J2");
     worksheet.mergeCells("K2:L2");
-    worksheet.mergeCells("M2:T2");
+    // worksheet.mergeCells("M2:T2");
     const secondTitleRow = worksheet.getRow(2);
     secondTitleRow.getCell(1).value = "Yerinde Alınan Ölçü";
     secondTitleRow.getCell(1).font={bold: true, size: 12}
     secondTitleRow.getCell(11).value = "Renk";
     secondTitleRow.getCell(11).font={bold: true, size: 12}
-    secondTitleRow.getCell(13).value = "Ekstralar";
-    secondTitleRow.getCell(13).font={bold: true, size: 12}
-    secondTitleRow.height = 30; // Satır yüksekliği
+    // secondTitleRow.getCell(13).value = "Ekstralar";
+    // secondTitleRow.getCell(13).font={bold: true, size: 12}
+    secondTitleRow.height = 40; // Satır yüksekliği
 
     // worksheet.mergeCells("M2:T3");
 
@@ -70,14 +70,16 @@ const DownloadData = (data, müsteriIsmi) => {
       "YÖN",
       "KANAT",
       "KASA",
-      "BAREL",
-      "KİLİT",
-      "LÜMBOZ",
-      "HİDROLİK",
-      "TEKMELİK",
-      "YANGINA D.",
-      "CUMBA",
-      "KOL",
+      // "BAREL",
+      // "KİLİT",
+      // "TEKMELİK",
+      // "İTMELİK",
+      // "MENFEZ",
+      // "HİDROLİK",
+      // "LÜMBOZ",
+      // "YANGINA D.",
+      // "CUMBA",
+      // "KOL",
     ];
 
     worksheet.addRow(headers); // 2. Satıra başlıkları ekle
@@ -95,7 +97,7 @@ const DownloadData = (data, müsteriIsmi) => {
     //   pattern: "solid",
     //   // fgColor: { argb: "FF0070C0" }, // Mavi arka plan
     // };
-    headerRow.height = 20;
+    headerRow.height = 30;
 
     headerRow.eachCell((cell, colNumber) => {
       cell.border = {
@@ -124,9 +126,11 @@ const DownloadData = (data, müsteriIsmi) => {
         singleData.kasa,
         singleData.barel,
         singleData.kilit,
-        singleData.lumboz == true ? "✔️" :"", //✓
-        singleData.hidrolik == true ? "✔️" :"",
         singleData.tekmelik == true ? "✔️" :"",
+        singleData.itmelik == true ? "✔️" :"",
+        singleData.menfez == true ? "✔️" :"",
+        singleData.hidrolik == true ? "✔️" :"",
+        singleData.lumboz == true ? "✔️" :"", //✓
         singleData.yangınaD == true ? "✔️" :"",
         singleData.cumba,
         singleData.kol
@@ -166,25 +170,76 @@ const DownloadData = (data, müsteriIsmi) => {
       { width: 10 }, // KASA
       { width: 10 }, // BAREL
       { width: 10 }, // KİLİT
-      { width: 10 }, // LÜBOZ
-      { width: 10 }, // HİDROLİK
-      { width: 10 }, // TELEMEK
-      { width: 10 }, // YANGINA D.
+      { width: 5 }, // TEKMELİK
+      { width: 5 }, // İTMELİK
+      { width: 5 }, // MENFEZ
+      { width: 5 }, // HİDROLİK
+      { width: 5 }, // LÜMBOZ
+      { width: 5 }, // YANGINA D.
       { width: 10 }, // CUMBA
       { width: 10 }, // KOL
     ];
 //!^!^!'^!'^'!^'!^!'^!'^!'^!''!!^!^'!'^!!'
-    worksheet.getCell('O3').alignment = { textRotation: 90,vertical: "center", horizontal: "center" };
-    worksheet.getCell('P3').alignment = { textRotation: 90,vertical: "center", horizontal: "center" };
-    worksheet.getCell('Q3').alignment = { textRotation: 90,vertical: "center", horizontal: "center" };
-    worksheet.getCell('R3').alignment = { textRotation: 90,vertical: "center", horizontal: "center" };
+ // Birleştirilmiş hücrelere border ekleme
+const mergeAndApplyBorder = (range, worksheet) => {
+  const [startCol, startRow, endCol, endRow] = range; // Başlangıç ve bitiş sütun/satır bilgisi
+  for (let row = startRow; row <= endRow; row++) {
+    for (let col = startCol; col <= endCol; col++) {
+      const cell = worksheet.getCell(row, col);
+      cell.border = {
+        top: { style: "thin" },
+        left: { style: "thin" },
+        bottom: { style: "thin" },
+        right: { style: "thin" },
+      };
+    }
+  }
+};
+
+// Birleştirme işlemleri
+worksheet.mergeCells("M2:M3");
+worksheet.mergeCells("N2:N3");
+worksheet.mergeCells("O2:O3");
+worksheet.mergeCells("P2:P3");
+worksheet.mergeCells("Q2:Q3");
+worksheet.mergeCells("R2:R3");
+worksheet.mergeCells("S2:S3");
+worksheet.mergeCells("T2:T3");
+worksheet.mergeCells("U2:U3");
+worksheet.mergeCells("V2:V3");
+
+// Header değerleri ve stilleri
+const rotateHeaders = [
+  "BAREL", "KİLİT", "TEKMELİK", "İTMELİK", "MENFEZ", 
+  "HİDROLİK", "LÜMBOZ", "YANGINA D.", "CUMBA", "KOL"
+];
+
+rotateHeaders.forEach((header, index) => {
+  const columnIndex = 13 + index; // Başlangıç sütunu: 13
+  const headerCell = headerRow.getCell(columnIndex);
+  headerCell.value = header;
+  headerCell.alignment = { textRotation: 90, vertical: "center", horizontal: "center" };
+  headerCell.font = { bold: true, size: 12 };
+});
+
+// Birleştirilmiş hücrelere sınır ekleme
+mergeAndApplyBorder([13, 2, 13, 3], worksheet); // M2:M3
+mergeAndApplyBorder([14, 2, 14, 3], worksheet); // N2:N3
+mergeAndApplyBorder([15, 2, 15, 3], worksheet); // O2:O3
+mergeAndApplyBorder([16, 2, 16, 3], worksheet); // P2:P3
+mergeAndApplyBorder([17, 2, 17, 3], worksheet); // Q2:Q3
+mergeAndApplyBorder([18, 2, 18, 3], worksheet); // R2:R3
+mergeAndApplyBorder([19, 2, 19, 3], worksheet); // S2:S3
+mergeAndApplyBorder([20, 2, 20, 3], worksheet); // T2:T3
+mergeAndApplyBorder([21, 2, 21, 3], worksheet); // U2:U3
+mergeAndApplyBorder([22, 2, 22, 3], worksheet); // V2:V3
 
 //!^!^!'^!'^'!^'!^!'^!'^!'^!''!!^!^'!'^!!'
 
 
 
-const response = await fetch(logo); // Logo yolundan veriyi getir
-const imageBuffer = await response.arrayBuffer(); // Resmi ArrayBuffer olarak oku
+// const response = await fetch(logo); // Logo yolundan veriyi getir
+// const imageBuffer = await response.arrayBuffer(); // Resmi ArrayBuffer olarak oku
 
 
 
