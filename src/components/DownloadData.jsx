@@ -269,6 +269,9 @@ const DownloadData = (data, müsteriIsmi) => {
 
     //!^!^!'^!'^'!^'!^!'^!'^!'^!''!!^!^'!'^!!'
 
+
+    // ===========================2. Sayfa============================
+    // ===========================2. Sayfa============================
     // ===========================2. Sayfa============================
     worksheet2.mergeCells("A1:N1"); // Hücreleri birleştir
     const titleRow2 = worksheet2.getRow(1);
@@ -314,6 +317,7 @@ const DownloadData = (data, müsteriIsmi) => {
     };
     headerRow2.height = 30;
 
+    
     headerRow2.eachCell((cell) => {
       cell.border = {
         top: { style: "thin" },
@@ -342,33 +346,24 @@ const DownloadData = (data, müsteriIsmi) => {
     ];
 
     data.forEach((singleData, i) => {
-      let kasa;
+      let dk = Number(singleData.duvarKalinligi)
+      let kasa = 35;
       let pervaz;
       let ek = "";
 
-      switch (Number(singleData.duvarKalinligi)) {
-        case 10:
-        case 11:
-          kasa = 35;
-          pervaz = 60;
-          break;
-
-        case 13:
-          kasa = 35;
-          pervaz = 90;
-          break;
-
-        case 23:
-          kasa = 35;
-          pervaz = 140;
-          ek = 45;
-          break;
-
-        default:
-          kasa = "?";
-          pervaz = "?";
-          ek = "?";
-          break;
+      if(dk <= 12.5 ){
+        pervaz = 60
+      }else if(dk <= 15.5){
+        pervaz = 90
+      }else if(dk <= 18.5){
+        pervaz = 120
+      }else if (dk <=20.5){
+        pervaz = 140
+      }else if (dk <=23.5){
+        pervaz = 167
+      }else{
+        pervaz = 167
+        ek = 4.5
       }
 
       const row = [
@@ -377,9 +372,9 @@ const DownloadData = (data, müsteriIsmi) => {
         singleData.kat,
         singleData.mahalNo,
         singleData.mahal,
-        singleData.en.toString(),
-        singleData.boy.toString(),
-        singleData.duvarKalinligi.toString(),
+        singleData.en,
+        singleData.boy,
+        Number(singleData.duvarKalinligi),
         1,
         singleData.yon,
         singleData.kasa, // Renk
@@ -388,6 +383,18 @@ const DownloadData = (data, müsteriIsmi) => {
         ek,
       ];
       worksheet2.addRow(row);
+    });
+
+    worksheet2.eachRow((row, rowNumber) => {
+      row.eachCell((cell) => {
+        cell.alignment = { vertical: "middle", horizontal: "center" };
+        cell.border = {
+          top: { style: "thin" },
+          left: { style: "thin" },
+          bottom: { style: "thin" },
+          right: { style: "thin" },
+        };
+      });
     });
 
     // Excel dosyasını indirilebilir hale getir
