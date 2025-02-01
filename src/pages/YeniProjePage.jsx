@@ -32,7 +32,7 @@ import Navbar from "../components/Navbar";
 import StyleFormRow from "../components/StyleFormRow";
 import DynamicForm from "../components/DynamicForm";
 
-const Style1 = () => {
+const YeniProjePage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [selected, setSelected] = useState(false);
 
@@ -318,14 +318,14 @@ const Style1 = () => {
               <DynamicForm müsteriIsmi={müsteriIsmi}/>
             </Box>
 
-            <Box sx={{ padding:"20px",display:"flex",gap:"10px"}}>
+            {/* <Box sx={{ padding:"20px",display:"flex",gap:"10px"}}>
             <Button onClick={handleNewRowBtn} variant="contained">
               Yeni Satır
             </Button>
             <Button onClick={handleSameRowBtn} variant="contained">
               Aynı Satır
             </Button>
-            </Box>
+            </Box> */}
          
           </Box>
         </Box>
@@ -334,4 +334,4 @@ const Style1 = () => {
   );
 };
 
-export default Style1;
+export default YeniProjePage;

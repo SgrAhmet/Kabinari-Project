@@ -7,7 +7,7 @@ import {
   Routes,
 } from "react-router-dom";
 import Home from "./pages/Home";
-import Style1 from "./pages/Style1";
+import YeniProjePage from "./pages/YeniProjePage";
 import FirebaseDeneme from "./pages/FirebaseDeneme";
 import PageNotFound from "./pages/PageNotFound";
 import Settings from "./pages/Settings";
@@ -21,8 +21,8 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/style1" element={<Style1 />} />
+          <Route path="/" element={<YeniProjePage />} />
+          <Route path="/Yeni-Proje" element={<YeniProjePage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/firebase" element={<FirebaseDeneme />} />
           <Route path="*" element={<PageNotFound />} />

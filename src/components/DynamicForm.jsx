@@ -17,7 +17,11 @@ import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 import DownloadData from "./DownloadData";
 
+
 const DynamicForm = ({müsteriIsmi}) => {
+
+
+
   const { control, handleSubmit, getValues, setValue } = useForm();
   const [rows, setRows] = useState([{ id: 0 }]);
 
@@ -58,7 +62,15 @@ const DynamicForm = ({müsteriIsmi}) => {
     });
 
     DownloadData(formattedData,müsteriIsmi)
+
+
+
   };
+
+  const CloudDownload = ()=>{
+
+
+  }
 
   // Sütun başlıkları
   const columnLabels = [
@@ -205,6 +217,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 {...field}
                 label="D.K."
                 size="small"
+                // type="number"  ????
                 sx={{ width: "8%" }}
               />
             )}
@@ -393,6 +406,7 @@ const DynamicForm = ({müsteriIsmi}) => {
           variant="contained"
           // type="submit"
           startIcon={<CloudDownloadIcon />}
+          onClick={CloudDownload}
           sx={{
             backgroundColor: "#dad726",
             "&:hover": { backgroundColor: "#cac727" },
