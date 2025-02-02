@@ -4,6 +4,42 @@ import { saveAs } from "file-saver";
 import logo from "../imgs/logo2.png";
 
 const DownloadData = (data, müsteriIsmi) => {
+  let extrasCheck = {
+    tekmelik: false,
+    itmelik: false,
+    menfez: false,
+    hidrolik: false,
+    lümboz: false,
+    yangınaD: false,
+  };
+  data.forEach((element) => {
+
+    if (element.tekmelik == true) {
+      extrasCheck.tekmelik = true;
+    }
+
+    if (element.itmelik == true) {
+      extrasCheck.itmelik = true;
+    }
+
+    if (element.menfez == true) {
+      extrasCheck.menfez = true;
+    }
+
+    if (element.hidrolik == true) {
+      extrasCheck.hidrolik = true;
+    }
+
+    if (element.lumboz == true) {
+      extrasCheck.lümboz = true;
+    }
+
+    if (element.yangınaD == true) {
+      extrasCheck.yangınaD = true;
+    }
+  });
+
+
   const createAndSaveExcel = async () => {
     // Yeni bir Excel Çalışma Kitabı oluştur
     const workbook = new ExcelJS.Workbook();
@@ -269,7 +305,6 @@ const DownloadData = (data, müsteriIsmi) => {
 
     //!^!^!'^!'^'!^'!^!'^!'^!'^!''!!^!^'!'^!!'
 
-
     // ===========================2. Sayfa============================
     // ===========================2. Sayfa============================
     // ===========================2. Sayfa============================
@@ -317,7 +352,6 @@ const DownloadData = (data, müsteriIsmi) => {
     };
     headerRow2.height = 30;
 
-    
     headerRow2.eachCell((cell) => {
       cell.border = {
         top: { style: "thin" },
@@ -346,24 +380,24 @@ const DownloadData = (data, müsteriIsmi) => {
     ];
 
     data.forEach((singleData, i) => {
-      let dk = Number(singleData.duvarKalinligi)
+      let dk = Number(singleData.duvarKalinligi);
       let kasa = 35;
       let pervaz;
       let ek = "";
 
-      if(dk <= 12.5 ){
-        pervaz = 60
-      }else if(dk <= 15.5){
-        pervaz = 90
-      }else if(dk <= 18.5){
-        pervaz = 120
-      }else if (dk <=20.5){
-        pervaz = 140
-      }else if (dk <=23.5){
-        pervaz = 167
-      }else{
-        pervaz = 167
-        ek = 4.5
+      if (dk <= 12.5) {
+        pervaz = 60;
+      } else if (dk <= 15.5) {
+        pervaz = 90;
+      } else if (dk <= 18.5) {
+        pervaz = 120;
+      } else if (dk <= 20.5) {
+        pervaz = 140;
+      } else if (dk <= 23.5) {
+        pervaz = 167;
+      } else {
+        pervaz = 167;
+        ek = 4.5;
       }
 
       const row = [
