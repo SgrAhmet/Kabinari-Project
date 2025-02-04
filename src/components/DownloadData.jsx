@@ -38,6 +38,15 @@ const DownloadData = (data, müsteriIsmi) => {
     }
   });
 
+  let howMuchExtras = 0;
+  extrasCheck.tekmelik && howMuchExtras++;
+  extrasCheck.itmelik && howMuchExtras++;
+  extrasCheck.menfez && howMuchExtras++;
+  extrasCheck.hidrolik && howMuchExtras++;
+  extrasCheck.lümboz && howMuchExtras++;
+  extrasCheck.yangınaD && howMuchExtras++;
+
+  console.log("howMuchExtras is " + howMuchExtras);
   const createAndSaveExcel = async () => {
     // Yeni bir Excel Çalışma Kitabı oluştur
     const workbook = new ExcelJS.Workbook();
@@ -94,7 +103,20 @@ const DownloadData = (data, müsteriIsmi) => {
     };
 
     // Tablo Başlığı (Örneğin AVE İNŞAAT PROJE gibi)
-    worksheet.mergeCells("A1:V1"); // Hücreleri birleştir
+
+    let cells ;
+
+    howMuchExtras >= 1 && (cells = "A1:Q1")
+    howMuchExtras >= 2 && (cells = "A1:R1")
+    howMuchExtras >= 3 && (cells = "A1:S1")
+    howMuchExtras >= 4 && (cells = "A1:T1")
+    howMuchExtras >= 5 && (cells = "A1:U1")
+    howMuchExtras == 6 && (cells = "A1:V1")
+
+    worksheet.mergeCells(cells); // Hücreleri birleştir
+
+
+
     const titleRow = worksheet.getRow(1);
     titleRow.getCell(1).value = müsteriIsmi === "" ? "Project" : müsteriIsmi; // Tablo Başlığı
     titleRow.getCell(1).font = { bold: true, size: 16 };
@@ -177,20 +199,16 @@ const DownloadData = (data, müsteriIsmi) => {
         singleData.kasa,
         singleData.barel,
         singleData.kilit,
-        extrasCheck.tekmelik ? (singleData.tekmelik == true ? "✔️" : "") : null,
-        extrasCheck.itmelik ? (singleData.itmelik == true ? "✔️" : "") : null,
-        extrasCheck.menfez ? (singleData.menfez == true ? "✔️" : "") : null,
-        extrasCheck.hidrolik ? (singleData.hidrolik == true ? "✔️" : "") : null,
-        extrasCheck.lümboz ? (singleData.lumboz == true ? "✔️" : "") : null,
-        extrasCheck.yangınaD ? (singleData.yangınaD == true ? "✔️" : "") : null,
-        // singleData.itmelik == true ? "✔️" : "",
-        // singleData.menfez == true ? "✔️" : "",
-        // singleData.hidrolik == true ? "✔️" : "",
-        // singleData.lumboz == true ? "✔️" : "", //✓
-        // singleData.yangınaD == true ? "✔️" : "",
         singleData.cumba,
         singleData.kol,
       ];
+
+      extrasCheck.tekmelik && row.push(singleData.tekmelik == true ? "✔️" : "");
+      extrasCheck.itmelik && row.push(singleData.itmelik == true ? "✔️" : "");
+      extrasCheck.menfez && row.push(singleData.menfez == true ? "✔️" : "");
+      extrasCheck.hidrolik && row.push(singleData.hidrolik == true ? "✔️" : "");
+      extrasCheck.lümboz && row.push(singleData.lumboz == true ? "✔️" : "");
+      extrasCheck.yangınaD && row.push(singleData.yangınaD == true ? "✔️" : "");
 
       // Yeni satır ekleme
       let addedRow = worksheet.addRow(row);
@@ -199,7 +217,6 @@ const DownloadData = (data, müsteriIsmi) => {
       addedRow.height = 25;
     });
 
-    // console.log(data)
 
     // Hücre Stilini Uygula
     worksheet.eachRow((row, rowNumber) => {
@@ -230,14 +247,14 @@ const DownloadData = (data, müsteriIsmi) => {
       { width: 10 }, // KASA
       { width: 10 }, // BAREL
       { width: 10 }, // KİLİT
+      { width: 10 }, // CUMBA
+      { width: 10 }, // KOL
       { width: 5 }, // TEKMELİK
       { width: 5 }, // İTMELİK
       { width: 5 }, // MENFEZ
       { width: 5 }, // HİDROLİK
       { width: 5 }, // LÜMBOZ
       { width: 5 }, // YANGINA D.
-      { width: 10 }, // CUMBA
-      { width: 10 }, // KOL
     ];
     //!^!^!'^!'^'!^'!^!'^!'^!'^!''!!^!^'!'^!!'
     // Birleştirilmiş hücrelere border ekleme
@@ -257,6 +274,7 @@ const DownloadData = (data, müsteriIsmi) => {
     };
 
     // Birleştirme işlemleri
+
     worksheet.mergeCells("M2:M3");
     worksheet.mergeCells("N2:N3");
     worksheet.mergeCells("O2:O3");
@@ -272,21 +290,16 @@ const DownloadData = (data, müsteriIsmi) => {
     const rotateHeaders = [
       "BAREL",
       "KİLİT",
-      extrasCheck.tekmelik == true ? "TEKMELİK" : null  ,
-      extrasCheck.itmelik == true ? "İTMELİK" : null  ,
-      extrasCheck.menfez == true ? "MENFEZ" : null  ,
-      extrasCheck.hidrolik == true ? "HİDROLİK" : null  ,
-      extrasCheck.lümboz == true ? "LÜMBOZ" : null  ,
-      extrasCheck.yangınaD == true ? "YANGINA D." : null  ,
-      // "TEKMELİK",
-      // "İTMELİK",
-      // "MENFEZ",
-      // "HİDROLİK",
-      // "LÜMBOZ",
-      // "YANGINA D.",
       "CUMBA",
       "KOL",
     ];
+
+    extrasCheck.tekmelik && rotateHeaders.push("TEKMELİK");
+    extrasCheck.itmelik && rotateHeaders.push("İTMELİK");
+    extrasCheck.menfez && rotateHeaders.push("MENFEZ");
+    extrasCheck.hidrolik && rotateHeaders.push("HİDROLİK");
+    extrasCheck.lümboz && rotateHeaders.push("LÜMBOZ");
+    extrasCheck.yangınaD && rotateHeaders.push("YANGINA D.");
 
     rotateHeaders.forEach((header, index) => {
       const columnIndex = 13 + index; // Başlangıç sütunu: 13
@@ -305,18 +318,20 @@ const DownloadData = (data, müsteriIsmi) => {
     mergeAndApplyBorder([14, 2, 14, 3], worksheet); // N2:N3
     mergeAndApplyBorder([15, 2, 15, 3], worksheet); // O2:O3
     mergeAndApplyBorder([16, 2, 16, 3], worksheet); // P2:P3
-    mergeAndApplyBorder([17, 2, 17, 3], worksheet); // Q2:Q3
-    mergeAndApplyBorder([18, 2, 18, 3], worksheet); // R2:R3
-    mergeAndApplyBorder([19, 2, 19, 3], worksheet); // S2:S3
-    mergeAndApplyBorder([20, 2, 20, 3], worksheet); // T2:T3
-    mergeAndApplyBorder([21, 2, 21, 3], worksheet); // U2:U3
-    mergeAndApplyBorder([22, 2, 22, 3], worksheet); // V2:V3
+
+    howMuchExtras >= 1 && mergeAndApplyBorder([17, 2, 17, 3], worksheet); // Q2:Q3
+    howMuchExtras >= 2 && mergeAndApplyBorder([18, 2, 18, 3], worksheet); // R2:R3
+    howMuchExtras >= 3 && mergeAndApplyBorder([19, 2, 19, 3], worksheet); // S2:S3
+    howMuchExtras >= 4 && mergeAndApplyBorder([20, 2, 20, 3], worksheet); // T2:T3
+    howMuchExtras >= 5 && mergeAndApplyBorder([21, 2, 21, 3], worksheet); // U2:U3
+    howMuchExtras == 6 && mergeAndApplyBorder([22, 2, 22, 3], worksheet); // V2:V3
 
     //!^!^!'^!'^'!^'!^!'^!'^!'^!''!!^!^'!'^!!'
 
     // ===========================2. Sayfa============================
     // ===========================2. Sayfa============================
     // ===========================2. Sayfa============================
+    
     worksheet2.mergeCells("A1:N1"); // Hücreleri birleştir
     const titleRow2 = worksheet2.getRow(1);
     titleRow2.getCell(1).value = "ALÜMİNYUM KASA KESİM NET ÖLÇÜSÜ";
@@ -372,20 +387,20 @@ const DownloadData = (data, müsteriIsmi) => {
     });
 
     worksheet2.columns = [
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
       { width: 10 },
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
-      { width: 8 },
+      { width: 10 },
+      { width: 10 },
+      { width: 15 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
     ];
 
     data.forEach((singleData, i) => {
@@ -425,7 +440,12 @@ const DownloadData = (data, müsteriIsmi) => {
         pervaz,
         ek,
       ];
-      worksheet2.addRow(row);
+      // worksheet2.addRow(row);
+      // Yeni satır ekleme
+      let addedRow = worksheet2.addRow(row);
+
+      // Satır yüksekliğini ayarlama (örneğin, 25 piksel yapalım)
+      addedRow.height = 25;
     });
 
     worksheet2.eachRow((row, rowNumber) => {

@@ -141,6 +141,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Kat"
                 size="small"
                 sx={{ width: "8%" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -154,6 +155,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Tip"
                 size="small"
                 sx={{ width: "8%" }}
+                 inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -167,6 +169,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Mahal No"
                 size="small"
                 sx={{ width: "8%" }}
+                 inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -179,6 +182,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Mahal"
                 size="small"
                 sx={{ width: "8%" }}
+                 inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -192,6 +196,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="En"
                 size="small"
                 sx={{ width: "8%" }}
+                 inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -205,6 +210,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Boy"
                 size="small"
                 sx={{ width: "8%" }}
+                 inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -219,6 +225,8 @@ const DynamicForm = ({müsteriIsmi}) => {
                 size="small"
                 // type="number"  ????
                 sx={{ width: "8%" }}
+                 inputProps={{ autoComplete: "off" }}
+                
               />
             )}
           />
@@ -248,6 +256,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Kanat"
                 size="small"
                 sx={{ width: "8%" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -261,6 +270,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Kasa"
                 size="small"
                 sx={{ width: "8%" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -289,6 +299,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Kilit"
                 size="small"
                 sx={{ width: "8%" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
