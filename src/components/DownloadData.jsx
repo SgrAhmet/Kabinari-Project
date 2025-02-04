@@ -13,7 +13,6 @@ const DownloadData = (data, müsteriIsmi) => {
     yangınaD: false,
   };
   data.forEach((element) => {
-
     if (element.tekmelik == true) {
       extrasCheck.tekmelik = true;
     }
@@ -38,7 +37,6 @@ const DownloadData = (data, müsteriIsmi) => {
       extrasCheck.yangınaD = true;
     }
   });
-
 
   const createAndSaveExcel = async () => {
     // Yeni bir Excel Çalışma Kitabı oluştur
@@ -179,12 +177,17 @@ const DownloadData = (data, müsteriIsmi) => {
         singleData.kasa,
         singleData.barel,
         singleData.kilit,
-        singleData.tekmelik == true ? "✔️" : "",
-        singleData.itmelik == true ? "✔️" : "",
-        singleData.menfez == true ? "✔️" : "",
-        singleData.hidrolik == true ? "✔️" : "",
-        singleData.lumboz == true ? "✔️" : "", //✓
-        singleData.yangınaD == true ? "✔️" : "",
+        extrasCheck.tekmelik ? (singleData.tekmelik == true ? "✔️" : "") : null,
+        extrasCheck.itmelik ? (singleData.itmelik == true ? "✔️" : "") : null,
+        extrasCheck.menfez ? (singleData.menfez == true ? "✔️" : "") : null,
+        extrasCheck.hidrolik ? (singleData.hidrolik == true ? "✔️" : "") : null,
+        extrasCheck.lümboz ? (singleData.lumboz == true ? "✔️" : "") : null,
+        extrasCheck.yangınaD ? (singleData.yangınaD == true ? "✔️" : "") : null,
+        // singleData.itmelik == true ? "✔️" : "",
+        // singleData.menfez == true ? "✔️" : "",
+        // singleData.hidrolik == true ? "✔️" : "",
+        // singleData.lumboz == true ? "✔️" : "", //✓
+        // singleData.yangınaD == true ? "✔️" : "",
         singleData.cumba,
         singleData.kol,
       ];
@@ -269,12 +272,18 @@ const DownloadData = (data, müsteriIsmi) => {
     const rotateHeaders = [
       "BAREL",
       "KİLİT",
-      "TEKMELİK",
-      "İTMELİK",
-      "MENFEZ",
-      "HİDROLİK",
-      "LÜMBOZ",
-      "YANGINA D.",
+      extrasCheck.tekmelik == true ? "TEKMELİK" : null  ,
+      extrasCheck.itmelik == true ? "İTMELİK" : null  ,
+      extrasCheck.menfez == true ? "MENFEZ" : null  ,
+      extrasCheck.hidrolik == true ? "HİDROLİK" : null  ,
+      extrasCheck.lümboz == true ? "LÜMBOZ" : null  ,
+      extrasCheck.yangınaD == true ? "YANGINA D." : null  ,
+      // "TEKMELİK",
+      // "İTMELİK",
+      // "MENFEZ",
+      // "HİDROLİK",
+      // "LÜMBOZ",
+      // "YANGINA D.",
       "CUMBA",
       "KOL",
     ];

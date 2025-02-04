@@ -13,23 +13,18 @@ import {
   } from "@mui/material";
 
 
+  import Spline from '@splinetool/react-spline';
+
 
 const PageNotFound = () => {
+
+
+
   return (
-    <Box sx={{
-        // border:"1px solid red",
-        height:"100vh",
-        display:"flex",
-        alignItems:"center",
-        justifyContent:"center",
-        flexDirection:"column"
-    }}>
+    <div style={{height : "100vh"}}>
 
-    <Typography variant="h2" color="warning">404</Typography>
-    <Typography variant="h2" color="error">Page Not Found</Typography>
-
-
-    </Box>
+<iframe src='https://my.spline.design/3dtextcopy-b903c7dc213d1f5253767dda568a9192/' frameborder='0' width='100%' height='100%'></iframe>
+  </div>
   )
 }
 
