@@ -15,9 +15,9 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
-import DownloadData from "./DownloadData";
-
-import ahmet from "./Deneme"
+// import DownloadData from "./DownloadData";
+import DownloadExcel from "./DownloadExcel";
+import addNewData from "./SetDatabase";
 
 
 const DynamicForm = ({müsteriIsmi}) => {
@@ -33,8 +33,6 @@ const DynamicForm = ({müsteriIsmi}) => {
   };
 
   const copyLastRow = () => {
-
-    console.log("dfsgş")
 
     if (rows.length === 0) return;
 
@@ -66,16 +64,31 @@ const DynamicForm = ({müsteriIsmi}) => {
       return rowData;
     });
 
-    DownloadData(formattedData,müsteriIsmi)
+    // DownloadData(formattedData,müsteriIsmi)
+
+    DownloadExcel(formattedData,müsteriIsmi)
 
 
 
   };
 
   const CloudDownload = ()=>{
-    // ahmet()
-    console.log("dfsgş")
 
+
+    // const formattedData = rows.map((row) => {
+    //   const rowData = {};
+    //   Object.keys(data).forEach((key) => {
+    //     if (key.includes(`-${row.id}`)) {
+    //       const newKey = key.replace(`-${row.id}`, ""); // Örneğin, "kat-0" -> "kat"
+    //       rowData[newKey] = data[key];
+    //     }
+    //   });
+    //   return rowData;
+    // });
+
+    // console.log(formattedData)
+
+    // addNewData(formattedData)
   }
 
   // Sütun başlıkları

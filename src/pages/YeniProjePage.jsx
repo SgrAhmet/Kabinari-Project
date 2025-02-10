@@ -127,7 +127,6 @@ const YeniProjePage = () => {
               // border:"1px solid red",
               display: "flex",
               padding: "10px",
-              // justifyContent:"space-around"
             }}
           >
             <Typography
@@ -146,10 +145,7 @@ const YeniProjePage = () => {
               border: "1px solid #FFFFFF",
               bgcolor: "#FFFFFF",
               borderRadius: "20px",
-              // height: "80vh",
-              // margin: "10px",
               marginX: "20px",
-              // boxShadow: 1,
               boxShadow:
                 "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px",
             }}
@@ -173,11 +169,8 @@ const YeniProjePage = () => {
                 <Typography
                   color="#A19D95"
                   fontSize={24}
-                  // sx={{justifyContent:"center"}}
                   display={"flex"}
                   alignItems={"center"}
-                  // fontFamily={"unset"}
-                  // marginLeft={"30px"}
                   marginX={"10px"}
                 >
                   Müşteri İsmi
@@ -194,13 +187,9 @@ const YeniProjePage = () => {
                   setmüsteriIsmi(e.target.value);
                 }}
               />
-              <Button
-                sx={{ backgroundColor: "#665B59", height: "80%" }}
-                variant="contained"
-                onClick={handleExelBtn}
-              >
-                Kaydet
-              </Button>
+              <Box height={"50px"} width={"95px"}></Box>
+
+              
             </Box>
 
             <Divider
@@ -226,11 +215,8 @@ const YeniProjePage = () => {
                 <Typography
                   color="#A19D95"
                   fontSize={24}
-                  // sx={{justifyContent:"center"}}
                   display={"flex"}
                   alignItems={"center"}
-                  // fontFamily={"unset"}
-                  // marginLeft={"30px"}
                   marginX={"10px"}
                 >
                   İş Numarası
@@ -293,35 +279,17 @@ const YeniProjePage = () => {
               sx={{ borderBottomWidth: 3, backgroundColor: "#DEDDDB" }}
             />
 
-            {/* <NameRow/> */}
+
             <Box
               sx={{
                 width: "100%",
                 // border:"3px solid black"
               }}
             >
-              {/* <StyleFormRow id={1} /> */}
-              {/* {rows.map((id) => (
-                <StyleFormRow
-                  key={id}
-                  id={id}
-                  data={{kat : "ahmet"}}
-                />
-              ))} */}
-
-              {/* {newRows} */}
-
               <DynamicForm müsteriIsmi={müsteriIsmi} />
             </Box>
 
-            {/* <Box sx={{ padding:"20px",display:"flex",gap:"10px"}}>
-            <Button onClick={handleNewRowBtn} variant="contained">
-              Yeni Satır
-            </Button>
-            <Button onClick={handleSameRowBtn} variant="contained">
-              Aynı Satır
-            </Button>
-            </Box> */}
+
           </Box>
         </Box>
       </Box>

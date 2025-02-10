@@ -1,5 +1,5 @@
-const ahmet = ()=>{
-    console.log("ahmet")
+const ahmet = (x)=>{
+    console.log(x)
 }
 
 export default ahmet
