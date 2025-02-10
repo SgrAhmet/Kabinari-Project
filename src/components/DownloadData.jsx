@@ -46,7 +46,6 @@ const DownloadData = (data, müsteriIsmi) => {
   extrasCheck.lümboz && howMuchExtras++;
   extrasCheck.yangınaD && howMuchExtras++;
 
-  console.log("howMuchExtras is " + howMuchExtras);
   const createAndSaveExcel = async () => {
     // Yeni bir Excel Çalışma Kitabı oluştur
     const workbook = new ExcelJS.Workbook();
@@ -55,6 +54,7 @@ const DownloadData = (data, müsteriIsmi) => {
     );
 
     const worksheet2 = workbook.addWorksheet("Alüminyum Kasa");
+    const worksheet3 = workbook.addWorksheet("Laminat Kapı Kesim");
 
     const pageSetup = {
       paperSize: 9, // A4
@@ -102,15 +102,32 @@ const DownloadData = (data, müsteriIsmi) => {
       },
     };
 
+  worksheet3.pageSetup = {
+      paperSize: 9, // A4
+      orientation: "landscape", // Yatay
+      fitToPage: true, // Sayfaya sığdır
+      fitToWidth: 1, // Genişlikte 1 sayfaya sığdır
+      fitToHeight: 1, // Yükseklikte 1 sayfaya sığdır
+      margins: {
+        left: 0.3,
+        right: 0.3,
+        top: 0.3,
+        bottom: 0.3,
+        header: 0.3,
+        footer: 0.3,
+      },
+    };
+
     // Tablo Başlığı (Örneğin AVE İNŞAAT PROJE gibi)
 
     let cells ;
 
-    howMuchExtras >= 1 && (cells = "A1:Q1")
-    howMuchExtras >= 2 && (cells = "A1:R1")
-    howMuchExtras >= 3 && (cells = "A1:S1")
-    howMuchExtras >= 4 && (cells = "A1:T1")
-    howMuchExtras >= 5 && (cells = "A1:U1")
+    howMuchExtras == 0 && (cells = "A1:P1")
+    howMuchExtras == 1 && (cells = "A1:Q1")
+    howMuchExtras == 2 && (cells = "A1:R1")
+    howMuchExtras == 3 && (cells = "A1:S1")
+    howMuchExtras == 4 && (cells = "A1:T1")
+    howMuchExtras == 5 && (cells = "A1:U1")
     howMuchExtras == 6 && (cells = "A1:V1")
 
     worksheet.mergeCells(cells); // Hücreleri birleştir
@@ -190,9 +207,9 @@ const DownloadData = (data, müsteriIsmi) => {
         singleData.kat,
         singleData.mahalNo,
         singleData.mahal,
-        singleData.en.toString(),
-        singleData.boy.toString(),
-        singleData.duvarKalinligi.toString(),
+        Number(singleData.en),
+        Number(singleData.boy),
+        Number(singleData.duvarKalinligi),
         1,
         singleData.yon,
         singleData.kanat,
@@ -203,6 +220,7 @@ const DownloadData = (data, müsteriIsmi) => {
         singleData.kol,
       ];
 
+      console.log("extrasCheck",extrasCheck)
       extrasCheck.tekmelik && row.push(singleData.tekmelik == true ? "✔️" : "");
       extrasCheck.itmelik && row.push(singleData.itmelik == true ? "✔️" : "");
       extrasCheck.menfez && row.push(singleData.menfez == true ? "✔️" : "");
@@ -233,16 +251,16 @@ const DownloadData = (data, müsteriIsmi) => {
 
     // Sütun Genişliklerini Ayarla
     worksheet.columns = [
-      { width: 3 }, // NO sütunu (dar)
-      { width: 6 }, // TİP
-      { width: 6 }, // KAT
-      { width: 10 }, // MAHAL NO
+      { width: 5 }, // NO sütunu (dar)
+      { width: 10 }, // TİP
+      { width: 10 }, // KAT
+      { width: 12 }, // MAHAL NO
       { width: 15 }, // MAHAL (uzun)
-      { width: 6 }, // EN
-      { width: 6 }, // BOY
-      { width: 6 }, // D.K.
-      { width: 6 }, // ADET
-      { width: 6 }, // YÖN
+      { width: 10 }, // EN
+      { width: 10 }, // BOY
+      { width: 10 }, // D.K.
+      { width: 10 }, // ADET
+      { width: 10 }, // YÖN
       { width: 10 }, // KANAT
       { width: 10 }, // KASA
       { width: 10 }, // BAREL
@@ -387,7 +405,7 @@ const DownloadData = (data, müsteriIsmi) => {
     });
 
     worksheet2.columns = [
-      { width: 10 },
+      { width: 5 },
       { width: 10 },
       { width: 10 },
       { width: 15 },
@@ -430,8 +448,8 @@ const DownloadData = (data, müsteriIsmi) => {
         singleData.kat,
         singleData.mahalNo,
         singleData.mahal,
-        singleData.en,
-        singleData.boy,
+        Number(singleData.en),
+        Number(singleData.boy),
         Number(singleData.duvarKalinligi),
         1,
         singleData.yon,
@@ -446,9 +464,139 @@ const DownloadData = (data, müsteriIsmi) => {
 
       // Satır yüksekliğini ayarlama (örneğin, 25 piksel yapalım)
       addedRow.height = 25;
+
+      // addedRow.eachCell((cell) => {
+      //   cell.font = { bold: true, size: 16 };
+      // });
+
     });
 
     worksheet2.eachRow((row, rowNumber) => {
+      row.eachCell((cell) => {
+        cell.alignment = { vertical: "middle", horizontal: "center" };
+        cell.border = {
+          top: { style: "thin" },
+          left: { style: "thin" },
+          bottom: { style: "thin" },
+          right: { style: "thin" },
+        };
+      });
+    });
+
+
+
+
+
+
+        //!^!^!'^!'^'!^'!^!'^!'^!'^!''!!^!^'!'^!!'
+
+    // ===========================3. Sayfa============================
+    // ===========================3. Sayfa============================
+    // ===========================3. Sayfa============================
+
+
+
+    worksheet3.mergeCells("A1:I1"); // Hücreleri birleştir
+    worksheet3.mergeCells("J1:K1"); // Hücreleri birleştir
+    const titleRow3 = worksheet3.getRow(1);
+    titleRow3.getCell(1).value = "LAMİNAT KAPI KESİM NET ÖLÇÜSÜ";
+    titleRow3.getCell(11).value = "KAPI CUMBASI";
+    titleRow3.getCell(1).font = { bold: true, size: 14 };
+    titleRow3.getCell(11).font = { bold: true, size: 14 };
+    titleRow3.getCell(1).alignment = {
+      vertical: "middle",
+      horizontal: "center",
+    };
+    titleRow3.getCell(2).alignment = {
+      vertical: "middle",
+      horizontal: "center",
+    };
+    titleRow3.getCell(11).alignment = {
+      vertical: "middle",
+      horizontal: "center",
+    };
+    // titleRow3.border = {
+    //   top: { style: "bold" },
+    //   left: { style: "bold" },
+    //   bottom: { style: "bold" },
+    //   right: { style: "bold" },
+    // };
+    titleRow3.height = 60; // Satır yüksekliği
+
+  // Tablo Başlıkları
+  const headers3 = [
+    "NO",
+    "TİP",
+    "MAHAL",
+    "EN",
+    "BOY",
+    "D.K.",
+    "ADET",
+    "KİLİT",
+    "RENK", // Kanat
+    "RENK", // Kapı Cumbası
+    "TİP",
+  ];
+
+  worksheet3.addRow(headers3); 
+  // Başlık Stilini Belirle
+  const headerRow3 = worksheet3.getRow(2);
+  headerRow3.font = { bold: false, size: 8 };
+  headerRow3.alignment = {
+    vertical: "middle",
+    horizontal: "center",
+  };
+  headerRow3.height = 30;
+
+  headerRow3.eachCell((cell) => {
+    cell.border = {
+      top: { style: "thin" },
+      left: { style: "thin" },
+      bottom: { style: "thin" },
+      right: { style: "thin" },
+    };
+    cell.font = { bold: true };
+  });
+
+  worksheet3.columns = [
+    { width: 5 },
+    { width: 10 },
+    { width: 10 },
+    { width: 10 },
+    { width: 10 },
+    { width: 10 },
+    { width: 10 },
+    { width: 10 },
+    { width: 15 },
+    { width: 15 },
+    { width: 10 },
+  ];
+
+
+
+  data.forEach((singleData, i) => {
+    const row = [
+      i + 1,
+      singleData.tip,
+      singleData.mahal,
+      Number(singleData.boy),
+      Number(singleData.en),
+      Number(singleData.duvarKalinligi),
+      1,
+      singleData.kilit,
+      singleData.kanat,
+      "???",
+      singleData.cumba, 
+    ];
+
+    let addedRow = worksheet3.addRow(row);
+
+    addedRow.height = 25;
+  });
+
+
+
+    worksheet3.eachRow((row, rowNumber) => {
       row.eachCell((cell) => {
         cell.alignment = { vertical: "middle", horizontal: "center" };
         cell.border = {

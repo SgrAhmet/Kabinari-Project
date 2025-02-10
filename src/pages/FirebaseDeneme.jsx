@@ -50,23 +50,35 @@ const FirebaseDeneme = () => {
     fetchData();
   }, []);
 
-  const data = {
-    kaçgündeögrenirim : "30 gün",
-    kimsoruyo:"Hakan"
-  };
+
   
-  const addNewOrder = async () => {
-    try {
-      const ordersCollectionRef = collection(db, "Deneme");
+  const addNewOrder = () => {
+    // try {
+    //   const ordersCollectionRef = collection(db, "Deneme");
 
-      await addDoc(ordersCollectionRef, data)
+    //   await addDoc(ordersCollectionRef, data)
+    //   console.log("gfgdf")
 
-      fetchData();
-    } catch (error) {
-      console.error("Error adding new order: ", error);
-    }
+    //   fetchData();
+
+      
+    // } catch (error) {
+    //   console.error("Error adding new order: ", error);
+     
+
+    // }
+
+
+    console.log("denemeeee")
+
+
+
   };
 
+
+  const denemeFunc=()=>{
+    console.log("ahmet")
+  }
 
   
   const handleInputChange =(e)=>{
@@ -93,13 +105,17 @@ const FirebaseDeneme = () => {
         onChange={handleInputChange}
       />
 
-      <Button
-        sx={{ backgroundColor: "#665B59" ,width: "10%"}}
-        variant="contained"
-        onClick={addNewOrder}
-      >
-        Veri Gönder
-      </Button>
+<Button
+  sx={{ backgroundColor: "#665B59", width: "10%" }}
+  variant="contained"
+  onClick={() => {
+    console.log("Button clicked!");
+    denemeFunc();
+  }}
+>
+  Veri Göndersss
+</Button>
+
     </Box>
   );
 };

@@ -36,7 +36,7 @@ const YeniProjePage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [selected, setSelected] = useState(false);
 
-  const [müsteriIsmi, setmüsteriIsmi] = useState("")
+  const [müsteriIsmi, setmüsteriIsmi] = useState("");
 
   const theme = createTheme({
     palette: {
@@ -44,10 +44,9 @@ const YeniProjePage = () => {
       primary: {
         main: isDarkMode ? "#BB86FC" : "#1976D2",
       },
-      secondary:{
-        main:"#0c9d0c",
-        
-      }
+      secondary: {
+        main: "#0c9d0c",
+      },
     },
   });
 
@@ -72,8 +71,6 @@ const YeniProjePage = () => {
     <StyleFormRow key={0} id={0} onChange={handleRowChange} />,
   ]);
 
-
-
   const handleExelBtn = () => {
     console.log("Form Verileri:", formDataList);
   };
@@ -91,8 +88,7 @@ const YeniProjePage = () => {
   };
 
   const handleSameRowBtn = () => {
-    const lastRowData =
-      formDataList[formDataList.length - 1] || {}; // Son satırın verisini al.
+    const lastRowData = formDataList[formDataList.length - 1] || {}; // Son satırın verisini al.
     setNewRows((oldArray) => [
       ...oldArray,
       <StyleFormRow
@@ -297,8 +293,7 @@ const YeniProjePage = () => {
               sx={{ borderBottomWidth: 3, backgroundColor: "#DEDDDB" }}
             />
 
-
-              {/* <NameRow/> */}
+            {/* <NameRow/> */}
             <Box
               sx={{
                 width: "100%",
@@ -315,7 +310,8 @@ const YeniProjePage = () => {
               ))} */}
 
               {/* {newRows} */}
-              <DynamicForm müsteriIsmi={müsteriIsmi}/>
+
+              <DynamicForm müsteriIsmi={müsteriIsmi} />
             </Box>
 
             {/* <Box sx={{ padding:"20px",display:"flex",gap:"10px"}}>
@@ -326,7 +322,6 @@ const YeniProjePage = () => {
               Aynı Satır
             </Button>
             </Box> */}
-         
           </Box>
         </Box>
       </Box>

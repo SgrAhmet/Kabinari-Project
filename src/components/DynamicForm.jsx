@@ -17,6 +17,8 @@ import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 import DownloadData from "./DownloadData";
 
+import ahmet from "./Deneme"
+
 
 const DynamicForm = ({müsteriIsmi}) => {
 
@@ -31,6 +33,9 @@ const DynamicForm = ({müsteriIsmi}) => {
   };
 
   const copyLastRow = () => {
+
+    console.log("dfsgş")
+
     if (rows.length === 0) return;
 
     const lastRowId = rows[rows.length - 1].id;
@@ -68,7 +73,8 @@ const DynamicForm = ({müsteriIsmi}) => {
   };
 
   const CloudDownload = ()=>{
-
+    // ahmet()
+    console.log("dfsgş")
 
   }
 
