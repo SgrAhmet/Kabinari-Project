@@ -7,7 +7,8 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+
+
 import {
   ThemeProvider,
   createTheme,
@@ -24,6 +25,7 @@ import {
   Typography,
   Drawer,
 } from "@mui/material";
+import { db } from "../firebaseConfig";
 
 const FirebaseDeneme = () => {
   const [veri1, setVeri1] = useState();
@@ -32,23 +34,22 @@ const FirebaseDeneme = () => {
   // const [veri1Input, setVeri1Input] = useState()
 
 
-  const fetchData = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "Deneme"));
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      //   setOrders(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const querySnapshot = await getDocs(collection(db, "Deneme"));
+  //     const data = querySnapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error("Error fetching data: ", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
 
   

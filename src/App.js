@@ -12,25 +12,22 @@ import FirebaseDeneme from "./pages/FirebaseDeneme";
 import PageNotFound from "./pages/PageNotFound";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
-
+import { AuthProvider } from "./components/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
-    <>
-      {/* <Link className="link" to="/settings">
-        Settings
-      </Link> */}
-
+    <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/Yeni-Proje" element={<YeniProjePage />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/firebase" element={<FirebaseDeneme />} />
+        <Route path="/" element={<Login />} />
+          <Route path="/Yeni-Proje" element={<PrivateRoute element={YeniProjePage} />} />
+          <Route path="/settings" element={<PrivateRoute element={Settings} />} />
+          <Route path="/firebase" element={<PrivateRoute element={FirebaseDeneme} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
-    </>
+    </AuthProvider>
   );
 }
 
