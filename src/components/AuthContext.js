@@ -11,7 +11,7 @@ import { db } from '../firebaseConfig';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);  //! False Olarak Değiştir
     const [password, setPassword] = useState("")
   const login = (passwordField) => {
 

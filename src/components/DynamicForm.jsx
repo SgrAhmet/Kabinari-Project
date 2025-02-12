@@ -64,31 +64,32 @@ const DynamicForm = ({müsteriIsmi}) => {
       return rowData;
     });
 
-    // DownloadData(formattedData,müsteriIsmi)
 
+    // DownloadData(formattedData,müsteriIsmi)
     DownloadExcel(formattedData,müsteriIsmi)
 
 
 
   };
 
-  const CloudDownload = ()=>{
+  const CloudDownload = (data)=>{
 
-
-    // const formattedData = rows.map((row) => {
-    //   const rowData = {};
-    //   Object.keys(data).forEach((key) => {
-    //     if (key.includes(`-${row.id}`)) {
-    //       const newKey = key.replace(`-${row.id}`, ""); // Örneğin, "kat-0" -> "kat"
-    //       rowData[newKey] = data[key];
-    //     }
-    //   });
-    //   return rowData;
-    // });
+    const formattedData = rows.map((row) => {
+      const rowData = {};
+      Object.keys(data).forEach((key) => {
+        if (key.includes(`-${row.id}`)) {
+          const newKey = key.replace(`-${row.id}`, ""); // Örneğin, "kat-0" -> "kat"
+          rowData[newKey] = data[key];
+        }
+      });
+      return rowData;
+    });
 
     // console.log(formattedData)
 
-    // addNewData(formattedData)
+ 
+
+    addNewData(formattedData)
   }
 
   // Sütun başlıkları
@@ -436,7 +437,7 @@ const DynamicForm = ({müsteriIsmi}) => {
           variant="contained"
           // type="submit"
           startIcon={<CloudDownloadIcon />}
-          onClick={CloudDownload}
+          onClick={handleSubmit(CloudDownload)}
           sx={{
             backgroundColor: "#dad726",
             "&:hover": { backgroundColor: "#cac727" },

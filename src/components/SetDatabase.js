@@ -9,18 +9,18 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
-const addNewData = async (x) => {
+const addNewData = async (data) => {
 
     console.log("data is")
-    console.log(x)
-//   try {
-//     const ordersCollectionRef = collection(db, "Deneme");
+    console.log(data)
+  try {
+    const ordersCollectionRef = collection(db, "Veriler");
 
-//     await addDoc(ordersCollectionRef, {data : x});
+    await addDoc(ordersCollectionRef, {data : data});
 
-//   } catch (error) {
-//     console.error("Error adding new order: ", error);
-//   }
+  } catch (error) {
+    console.error("Error adding new order: ", error);
+  }
 };
 
 export default addNewData;
