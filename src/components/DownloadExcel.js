@@ -38,8 +38,11 @@ const DownloadExcel = (data, müsteriIsmi) => {
     }
   });
 
+
+
+
   let howMuchExtras = 0;
-  extrasCheck.tekmelik && howMuchExtras++;
+            extrasCheck.tekmelik && howMuchExtras++;
   extrasCheck.itmelik && howMuchExtras++;
   extrasCheck.menfez && howMuchExtras++;
   extrasCheck.hidrolik && howMuchExtras++;

@@ -11,6 +11,8 @@ import YeniProjePage from "./pages/YeniProjePage";
 import FirebaseDeneme from "./pages/FirebaseDeneme";
 import PageNotFound from "./pages/PageNotFound";
 import Settings from "./pages/Settings";
+import Login from "./pages/Login";
+
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path="/" element={<YeniProjePage />} />
+          <Route path="/" element={<Login />} />
           <Route path="/Yeni-Proje" element={<YeniProjePage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/firebase" element={<FirebaseDeneme />} />
