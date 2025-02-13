@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-
 const addNewData = async (data) => {
-
-    console.log("data is")
-    console.log(data)
   try {
     const ordersCollectionRef = collection(db, "Veriler");
-
-    await addDoc(ordersCollectionRef, {data : data});
-
+    let x = { a1: "ahmet", a2: 2, a3: false, a4: undefined };
+    await addDoc(ordersCollectionRef, { data: x });
   } catch (error) {
     console.error("Error adding new order: ", error);
   }
 };
-
 export default addNewData;
