@@ -99,6 +99,7 @@ const Login = () => {
             onChange={(e) => handleChange(e.target.value)}
             inputProps={{ autoComplete: "off" }}
             label="Password"
+            type="password"
           />
           <Button onClick={handleLogin} variant="contained" >
             Login

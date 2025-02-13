@@ -12,20 +12,40 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
-
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
+import { ToastContainer, toast,Bounce } from "react-toastify";
 // import DownloadData from "./DownloadData";
 import DownloadExcel from "./DownloadExcel";
 import addNewData from "./SetDatabase";
 
-
-const DynamicForm = ({müsteriIsmi}) => {
-
-
-
+const DynamicForm = ({ müsteriIsmi }) => {
   const { control, handleSubmit, getValues, setValue } = useForm();
   const [rows, setRows] = useState([{ id: 0 }]);
+
+  const notifySuccess = () => toast.success('Buluta Yüklendi', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    transition: Bounce,
+    });
+    
+  const notifyError= () => toast.error('Buluta Yüklenirken Bir Hata Oluştu', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    transition: Bounce,
+    });
 
   const addRow = () => {
     const newRow = { id: rows.length };
@@ -33,7 +53,6 @@ const DynamicForm = ({müsteriIsmi}) => {
   };
 
   const copyLastRow = () => {
-
     if (rows.length === 0) return;
 
     const lastRowId = rows[rows.length - 1].id;
@@ -64,16 +83,11 @@ const DynamicForm = ({müsteriIsmi}) => {
       return rowData;
     });
 
-
     // DownloadData(formattedData,müsteriIsmi)
-    DownloadExcel(formattedData,müsteriIsmi)
-
-
-
+    DownloadExcel(formattedData, müsteriIsmi);
   };
 
-  const CloudDownload = (data)=>{
-
+  const CloudDownload = (data) => {
     const formattedData = rows.map((row) => {
       const rowData = {};
       Object.keys(data).forEach((key) => {
@@ -85,12 +99,9 @@ const DynamicForm = ({müsteriIsmi}) => {
       return rowData;
     });
 
-    // console.log(formattedData)
+    addNewData(formattedData,notifySuccess,notifyError)
 
- 
-
-    addNewData(formattedData)
-  }
+  };
 
   // Sütun başlıkları
   const columnLabels = [
@@ -122,6 +133,19 @@ const DynamicForm = ({müsteriIsmi}) => {
       onSubmit={handleSubmit(onSubmit)}
       sx={{ padding: 2, marginTop: 2 }}
     >
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
       {/* Sütun Başlıkları */}
       <Box sx={{ display: "flex", gap: 1, marginBottom: 1 }}>
         {columnLabels.map((label, index) => (
@@ -175,7 +199,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Tip"
                 size="small"
                 sx={{ width: "8%" }}
-                 inputProps={{ autoComplete: "off" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -189,20 +213,21 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Mahal No"
                 size="small"
                 sx={{ width: "8%" }}
-                 inputProps={{ autoComplete: "off" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
           <Controller
             name={`mahal-${row.id}`}
             control={control}
+            defaultValue=""
             render={({ field }) => (
               <TextField
                 {...field}
                 label="Mahal"
                 size="small"
                 sx={{ width: "8%" }}
-                 inputProps={{ autoComplete: "off" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -216,7 +241,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="En"
                 size="small"
                 sx={{ width: "8%" }}
-                 inputProps={{ autoComplete: "off" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -230,7 +255,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 label="Boy"
                 size="small"
                 sx={{ width: "8%" }}
-                 inputProps={{ autoComplete: "off" }}
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -245,8 +270,7 @@ const DynamicForm = ({müsteriIsmi}) => {
                 size="small"
                 // type="number"  ????
                 sx={{ width: "8%" }}
-                 inputProps={{ autoComplete: "off" }}
-                
+                inputProps={{ autoComplete: "off" }}
               />
             )}
           />
@@ -258,7 +282,7 @@ const DynamicForm = ({müsteriIsmi}) => {
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Yön</InputLabel>
                 <Select {...field} label="Yön">
-                  <MenuItem value="sağ" >Sağ</MenuItem>
+                  <MenuItem value="sağ">Sağ</MenuItem>
                   <MenuItem value="sol">Sol</MenuItem>
                   <MenuItem value="dışarı-sağ">D. Sağ</MenuItem>
                   <MenuItem value="dışarı-sol">D. Sol</MenuItem>
@@ -463,4 +487,4 @@ const DynamicForm = ({müsteriIsmi}) => {
 };
 
 export default DynamicForm;
-// SON 
+// SON

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import { ThemeProvider, createTheme, Button, Box,List,ListItem,ListItemButton,ListItemText,ListItemIcon,Divider, ToggleButton, TextField,Typography,Drawer  } from "@mui/material";
 import {
   Person,
@@ -9,11 +10,22 @@ import {
   Cabin,
   AccessAlarm,
   SensorDoor,
-  Task
+  Task,
+  CreateNewFolder,
+  AutoAwesomeMotion
 } from "@mui/icons-material";
+import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import logo from "../imgs/logo2.png"
 import { Link } from "react-router-dom";
 const SideBar = ({open,toggleDrawer}) => {
+
+
+  const navigate = useNavigate();
+
+  const handleNavigation = (index) => {
+    const routes = ["/Yeni-Proje", "/", "/  "];
+    navigate(routes[index]);
+  };
 
     const DrawerList = (
         <Box sx={{ width: 250, }} role="presentation" onClick={toggleDrawer(false)}>
@@ -22,11 +34,11 @@ const SideBar = ({open,toggleDrawer}) => {
               sx={{ borderBottomWidth: 3, backgroundColor: "#DEDDDB" }}
             />
           <List>
-            {['Müşteriler', 'Tüm Projeler', 'Son Proje'].map((text, index) => (
+            {['Yeni Proje', 'Tüm Projeler', 'Son Proje'].map((text, index) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={()=>handleNavigation(index)}>
                   <ListItemIcon>
-                    {index == 0 ? <Groups2 /> : index == 1 ? <Task /> : <AccessAlarm />}
+                    {index == 0 ? <CreateNewFolder /> : index == 1 ? <AutoAwesomeMotion />  : <AccessAlarm />}
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItemButton>
@@ -53,7 +65,7 @@ const SideBar = ({open,toggleDrawer}) => {
     <>
     <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
-      </Drawer>
+    </Drawer>
 
     </>
   )
