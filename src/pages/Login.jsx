@@ -40,10 +40,9 @@ const Login = () => {
         gap: "20px",
         justifyContent: "center",
         flexDirection: "row",
-        // background: "rgb(9,9,121)",
-        // background:
-        //   "linear-gradient(90deg, rgba(9,9,121,1) 10%, rgba(0,212,255,1) 70%)",
-        // background: "white",
+        // background: "#1C3960"
+        // background: "rgb(255,255,255)",
+        // background: "linear-gradient(90deg, rgba(255,255,255,1) 1%, rgba(28,57,96,1) 60%)",
 
         backgroundImage: `url(${srcBg})`,
         backgroundSize: "cover",
@@ -56,7 +55,8 @@ const Login = () => {
 {/* <img src={src} alt="asd" /> */}
       <Box
         sx={{
-          backgroundColor: "#ffffff57",
+          // backgroundColor: "#ff#ffffffef",
+          backgroundColor:"#ffffff",
           width: "70%",
           height: "80%",
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
