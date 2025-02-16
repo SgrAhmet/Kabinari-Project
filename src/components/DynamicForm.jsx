@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   TextField,
@@ -9,6 +9,7 @@ import {
   MenuItem,
   Button,
   Checkbox,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -19,7 +20,7 @@ import { ToastContainer, toast,Bounce } from "react-toastify";
 import DownloadExcel from "./DownloadExcel";
 import addNewData from "./SetDatabase";
 
-const DynamicForm = ({ müsteriIsmi }) => {
+const DynamicForm = ({ müsteriIsmi ,denemeData}) => {
   const { control, handleSubmit, getValues, setValue } = useForm();
   const [rows, setRows] = useState([{ id: 0 }]);
 
@@ -46,6 +47,21 @@ const DynamicForm = ({ müsteriIsmi }) => {
     theme: "colored",
     transition: Bounce,
     });
+
+    const controlInbound = () => {
+      setRows(prevRows => {
+          const newRows = [...prevRows]; // Önceki state'i kopyala
+          for (let i = 1; i < denemeData.length; i++) {
+              newRows.push({ id: i }); // Yeni elemanları ekle
+          }
+          return newRows; // Güncellenmiş array'i döndür
+      });
+  };
+  
+  useEffect(() => {
+      denemeData && controlInbound() 
+  }, []);
+
 
   const addRow = () => {
     const newRow = { id: rows.length };
@@ -99,7 +115,17 @@ const DynamicForm = ({ müsteriIsmi }) => {
       return rowData;
     });
 
-    addNewData(formattedData,notifySuccess,notifyError)
+    const lastRowData = getValues();
+    // console.log(lastRowData)
+    // console.log(formattedData) 
+
+
+    console.log(denemeData)
+    console.log(rows)
+
+
+    // addNewData(formattedData,notifySuccess,notifyError)
+
 
   };
 
@@ -174,11 +200,14 @@ const DynamicForm = ({ müsteriIsmi }) => {
 
       {/* Form Satırları */}
       {rows.map((row) => (
+        
         <Box key={row.id} sx={{ display: "flex", gap: 1, marginBottom: 1 }}>
+        {/* <Typography>{row.id + 1}</Typography> */}
+
           <Controller
             name={`kat-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.kat ? denemeData[row.id].kat : ""} // Direk o datayı kontrol ettiğimizde de data gelmediğinde undifiendin [i] incisini okuyoamıyr
             render={({ field }) => (
               <TextField
                 {...field}
@@ -192,7 +221,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`tip-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.tip ? denemeData[row.id].tip : ""} // böyle aptığımızda yeni satır eklenemiyor
             render={({ field }) => (
               <TextField
                 {...field}
@@ -206,7 +235,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`mahalNo-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.mahalNo ? denemeData[row.id].mahalNo : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -220,7 +249,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`mahal-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.mahal ? denemeData[row.id].mahal : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -234,7 +263,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`en-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.en ? denemeData[row.id].en : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -248,7 +277,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`boy-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.boy ? denemeData[row.id].boy : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -262,7 +291,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`duvarKalinligi-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.duvarKalinligi ? denemeData[row.id].duvarKalinligi : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -277,7 +306,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`yon-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.yon ? denemeData[row.id].yon : ""}
             render={({ field }) => (
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Yön</InputLabel>
@@ -293,7 +322,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`kanat-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.kanat ? denemeData[row.id].kanat : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -307,7 +336,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`kasa-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.kasa ? denemeData[row.id].kasa : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -321,7 +350,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`barel-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.barel ? denemeData[row.id].barel : ""}
             render={({ field }) => (
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Barel</InputLabel>
@@ -336,7 +365,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`kilit-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.kilit ? denemeData[row.id].kilit : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -350,7 +379,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`cumba-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.cumba ? denemeData[row.id].cumba : ""}
             render={({ field }) => (
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Cumba</InputLabel>
@@ -364,7 +393,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`kol-${row.id}`}
             control={control}
-            defaultValue=""
+            defaultValue={denemeData && denemeData[row.id]?.kol ? denemeData[row.id].kol : ""}
             render={({ field }) => (
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Kol</InputLabel>
@@ -378,7 +407,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`tekmelik-${row.id}`}
             control={control}
-            defaultValue={false}
+            defaultValue={denemeData && denemeData[row.id]?.tekmelik ? denemeData[row.id].tekmelik : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -386,7 +415,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`itmelik-${row.id}`}
             control={control}
-            defaultValue={false}
+            defaultValue={denemeData && denemeData[row.id]?.itmelik ? denemeData[row.id].itmelik : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -394,7 +423,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`menfez-${row.id}`}
             control={control}
-            defaultValue={false}
+            defaultValue={denemeData && denemeData[row.id]?.menfez ? denemeData[row.id].menfez : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -402,7 +431,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`hidrolik-${row.id}`}
             control={control}
-            defaultValue={false}
+            defaultValue={denemeData && denemeData[row.id]?.hidrolik ? denemeData[row.id].hidrolik : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -410,7 +439,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`lumboz-${row.id}`}
             control={control}
-            defaultValue={false}
+            defaultValue={denemeData && denemeData[row.id]?.lumboz ? denemeData[row.id].lumboz : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -418,7 +447,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
           <Controller
             name={`yangınaD-${row.id}`}
             control={control}
-            defaultValue={false}
+            defaultValue={denemeData && denemeData[row.id]?.yangınaD ? denemeData[row.id].yangınaD : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -467,7 +496,7 @@ const DynamicForm = ({ müsteriIsmi }) => {
             "&:hover": { backgroundColor: "#cac727" },
           }}
         >
-          BULUTA YÜKLE
+          {denemeData ? "BULUTU GÜNCELLE" : "BULUTA YÜKLE"}
         </Button>
 
         <Button

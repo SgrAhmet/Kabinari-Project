@@ -103,6 +103,74 @@ const YeniProjePage = () => {
 
   //! =================================================
 
+  const denemeData = [
+    {
+      barel: "?2",
+      boy: "200",
+      cumba: "u",
+      duvarKalinligi: "25",
+      en: "120",
+      hidrolik: true,
+      itmelik: true,
+      kanat: "ka",
+      kasa: "sa",
+      kat: "1",
+      kilit: "ki",
+      kol: "baston",
+      lumboz: true,
+      mahal: "1",
+      mahalNo: "3",
+      menfez: true,
+      tekmelik: true,
+      tip: "asd",
+      yangınaD: true,
+      yon: "sağ",
+    },
+    {
+      barel: "?1",
+      boy: "",
+      cumba: "pvc",
+      duvarKalinligi: "",
+      en: "",
+      hidrolik: false,
+      itmelik: true,
+      kanat: "",
+      kasa: "",
+      kat: "2",
+      kilit: "",
+      kol: "boru",
+      lumboz: false,
+      mahal: "2",
+      mahalNo: "3",
+      menfez: true,
+      tekmelik: false,
+      tip: "asd",
+      yangınaD: false,
+      yon: "sol",
+    },   {
+      barel: "?3",
+      boy: "",
+      cumba: "",
+      duvarKalinligi: "",
+      en: "",
+      hidrolik: false,
+      itmelik: true,
+      kanat: "",
+      kasa: "",
+      kat: "3",
+      kilit: "",
+      kol: "",
+      lumboz: false,
+      mahal: "3",
+      mahalNo: "3",
+      menfez: true,
+      tekmelik: false,
+      tip: "asd",
+      yangınaD: false,
+      yon: "dışarı-sağ",
+    }
+  ];
+
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -188,8 +256,6 @@ const YeniProjePage = () => {
                 }}
               />
               <Box height={"50px"} width={"95px"}></Box>
-
-              
             </Box>
 
             <Divider
@@ -279,17 +345,15 @@ const YeniProjePage = () => {
               sx={{ borderBottomWidth: 3, backgroundColor: "#DEDDDB" }}
             />
 
-
             <Box
               sx={{
                 width: "100%",
                 // border:"3px solid black"
               }}
             >
-              <DynamicForm müsteriIsmi={müsteriIsmi} />
+              <DynamicForm müsteriIsmi={müsteriIsmi} denemeData={denemeData} />
+              {/* <DynamicForm müsteriIsmi={müsteriIsmi}  /> */}
             </Box>
-
-
           </Box>
         </Box>
       </Box>
