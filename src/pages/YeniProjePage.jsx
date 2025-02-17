@@ -339,7 +339,7 @@ const YeniProjePage = () => {
                 // border:"3px solid black"
               }}
             >
-              <DynamicForm müsteriIsmi={müsteriIsmi} denemeData={denemeData} olusturmaTarihi={olusturmaTarihi} isNumarası={isNumarası}/>
+              <DynamicForm müsteriIsmi={müsteriIsmi} data={denemeData} olusturmaTarihi={olusturmaTarihi} isNumarası={isNumarası}/>
               {/* <DynamicForm müsteriIsmi={müsteriIsmi}  /> */}
             </Box>
           </Box>

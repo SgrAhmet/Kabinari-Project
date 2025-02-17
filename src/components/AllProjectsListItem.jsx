@@ -13,34 +13,38 @@ import {
   Paper,
 } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import {deleteDoc,doc} from "firebase/firestore";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
-const AllProjectsListItem = ({ data,fetchData }) => {
+const AllProjectsListItem = ({ data, fetchData }) => {
   const sectionSx = {
     width: "25%",
   };
-  const iconSx=
-    { fontSize: 32,color:"#1C3960" ,":hover" : {
-        color:"#E41C3C",
-                }}
+  const iconSx = {
+    fontSize: 32,
+    color: "#1C3960",
+    ":hover": {
+      color: "#E41C3C",
+      zIndex:9999
+    }
+  };
   const navigate = useNavigate();
   const options = {
-    title: 'Dikkat',
+    title: "Dikkat",
     message: `İş Numarası ${data.isNumarası} olan projeyi veri tabanından silmek istediğinizden emin misiniz?`,
     buttons: [
       {
-        label: 'Evet',
-        onClick: () =>{ deleteDocument(data.id)
-            fetchData()
-        }
-        
+        label: "Evet",
+        onClick: () => {
+          deleteDocument(data.id);
+          fetchData();
+        },
       },
       {
-        label: 'Hayır',
+        label: "Hayır",
         // onClick: () => alert('Click No')
-      }
+      },
     ],
     closeOnEscape: true,
     closeOnClickOutside: true,
@@ -50,15 +54,13 @@ const AllProjectsListItem = ({ data,fetchData }) => {
     onClickOutside: () => {},
     onKeypress: () => {},
     onKeypressEscape: () => {},
-    overlayClassName: "overlay-custom-class-name"
+    overlayClassName: "overlay-custom-class-name",
   };
-  
+
   const deleteDocument = async (docId) => {
     try {
-    
       const orderDocRef = doc(db, "Veriler", docId);
       await deleteDoc(orderDocRef);
-    
     } catch (error) {
       console.error("Error deleting order: ", error);
     }
@@ -83,7 +85,7 @@ const AllProjectsListItem = ({ data,fetchData }) => {
         justifyContent: "space-between",
         boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
       }}
-      onClick={()=>navigate(`/Proje/${data.id}`, { state: { data: data }}) }
+      onClick={() => navigate(`/Proje/${data.id}`, { state: { data: data } })}
       // navigate(`/Proje-${data.id}`, { state: { projectData: data } });
     >
       <Box sx={sectionSx}>
@@ -103,7 +105,10 @@ const AllProjectsListItem = ({ data,fetchData }) => {
         <Typography>{data.olusturmaTarihi}</Typography>
       </Box>
       <Box sx={{ ...sectionSx, display: "flex", justifyContent: "flex-end" }}>
-        <HighlightOffIcon sx={iconSx} onClick={()=>confirmAlert(options)} />
+        <HighlightOffIcon sx={iconSx}   onClick={(e) => {
+    e.stopPropagation(); // Bu, olayı bubbling'den durdurur
+    confirmAlert(options);
+  }} />
       </Box>
     </Box>
   );

@@ -57,7 +57,7 @@ const ExistentProject = () => {
        }}
      >
    
-       <DynamicForm/>
+       <DynamicForm data={data.data}/>
      </Box>
    </Box>
   )

@@ -21,7 +21,7 @@ import DownloadExcel from "./DownloadExcel";
 import addNewData from "./SetDatabase";
 import dayjs from "dayjs";
 
-const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) => {
+const DynamicForm = ({ müsteriIsmi ,data,olusturmaTarihi,isNumarası}) => {
   const { control, handleSubmit, getValues, setValue } = useForm();
   const [rows, setRows] = useState([{ id: 0 }]);
 
@@ -52,7 +52,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
     const controlInbound = () => {
       setRows(prevRows => {
           const newRows = [...prevRows]; // Önceki state'i kopyala
-          for (let i = 1; i < denemeData.length; i++) {
+          for (let i = 1; i < data.length; i++) {
               newRows.push({ id: i }); // Yeni elemanları ekle
           }
           return newRows; // Güncellenmiş array'i döndür
@@ -60,7 +60,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
   };
   
   useEffect(() => {
-      denemeData && controlInbound() 
+      data && controlInbound() 
   }, []);
 
 
@@ -121,7 +121,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
     // console.log(formattedData) 
 
 
-    // console.log(denemeData)
+    // console.log(data)
     // console.log(rows)
 
 
@@ -210,7 +210,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`kat-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.kat ? denemeData[row.id].kat : ""} // Direk o datayı kontrol ettiğimizde de data gelmediğinde undifiendin [i] incisini okuyoamıyr
+            defaultValue={data && data[row.id]?.kat ? data[row.id].kat : ""} // Direk o datayı kontrol ettiğimizde de data gelmediğinde undifiendin [i] incisini okuyoamıyr
             render={({ field }) => (
               <TextField
                 {...field}
@@ -224,7 +224,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`tip-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.tip ? denemeData[row.id].tip : ""} // böyle aptığımızda yeni satır eklenemiyor
+            defaultValue={data && data[row.id]?.tip ? data[row.id].tip : ""} // böyle aptığımızda yeni satır eklenemiyor
             render={({ field }) => (
               <TextField
                 {...field}
@@ -238,7 +238,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`mahalNo-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.mahalNo ? denemeData[row.id].mahalNo : ""}
+            defaultValue={data && data[row.id]?.mahalNo ? data[row.id].mahalNo : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -252,7 +252,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`mahal-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.mahal ? denemeData[row.id].mahal : ""}
+            defaultValue={data && data[row.id]?.mahal ? data[row.id].mahal : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -266,7 +266,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`en-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.en ? denemeData[row.id].en : ""}
+            defaultValue={data && data[row.id]?.en ? data[row.id].en : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -280,7 +280,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`boy-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.boy ? denemeData[row.id].boy : ""}
+            defaultValue={data && data[row.id]?.boy ? data[row.id].boy : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -294,7 +294,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`duvarKalinligi-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.duvarKalinligi ? denemeData[row.id].duvarKalinligi : ""}
+            defaultValue={data && data[row.id]?.duvarKalinligi ? data[row.id].duvarKalinligi : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -309,7 +309,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`yon-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.yon ? denemeData[row.id].yon : ""}
+            defaultValue={data && data[row.id]?.yon ? data[row.id].yon : ""}
             render={({ field }) => (
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Yön</InputLabel>
@@ -325,7 +325,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`kanat-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.kanat ? denemeData[row.id].kanat : ""}
+            defaultValue={data && data[row.id]?.kanat ? data[row.id].kanat : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -339,7 +339,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`kasa-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.kasa ? denemeData[row.id].kasa : ""}
+            defaultValue={data && data[row.id]?.kasa ? data[row.id].kasa : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -353,7 +353,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`barel-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.barel ? denemeData[row.id].barel : ""}
+            defaultValue={data && data[row.id]?.barel ? data[row.id].barel : ""}
             render={({ field }) => (
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Barel</InputLabel>
@@ -368,7 +368,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`kilit-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.kilit ? denemeData[row.id].kilit : ""}
+            defaultValue={data && data[row.id]?.kilit ? data[row.id].kilit : ""}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -382,7 +382,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`cumba-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.cumba ? denemeData[row.id].cumba : ""}
+            defaultValue={data && data[row.id]?.cumba ? data[row.id].cumba : ""}
             render={({ field }) => (
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Cumba</InputLabel>
@@ -396,7 +396,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`kol-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.kol ? denemeData[row.id].kol : ""}
+            defaultValue={data && data[row.id]?.kol ? data[row.id].kol : ""}
             render={({ field }) => (
               <FormControl size="small" sx={{ width: "8%" }}>
                 <InputLabel>Kol</InputLabel>
@@ -410,7 +410,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`tekmelik-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.tekmelik ? denemeData[row.id].tekmelik : false}
+            defaultValue={data && data[row.id]?.tekmelik ? data[row.id].tekmelik : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -418,7 +418,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`itmelik-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.itmelik ? denemeData[row.id].itmelik : false}
+            defaultValue={data && data[row.id]?.itmelik ? data[row.id].itmelik : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -426,7 +426,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`menfez-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.menfez ? denemeData[row.id].menfez : false}
+            defaultValue={data && data[row.id]?.menfez ? data[row.id].menfez : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -434,7 +434,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`hidrolik-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.hidrolik ? denemeData[row.id].hidrolik : false}
+            defaultValue={data && data[row.id]?.hidrolik ? data[row.id].hidrolik : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -442,7 +442,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`lumboz-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.lumboz ? denemeData[row.id].lumboz : false}
+            defaultValue={data && data[row.id]?.lumboz ? data[row.id].lumboz : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -450,7 +450,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
           <Controller
             name={`yangınaD-${row.id}`}
             control={control}
-            defaultValue={denemeData && denemeData[row.id]?.yangınaD ? denemeData[row.id].yangınaD : false}
+            defaultValue={data && data[row.id]?.yangınaD ? data[row.id].yangınaD : false}
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -499,7 +499,7 @@ const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) =>
             "&:hover": { backgroundColor: "#cac727" },
           }}
         >
-          {denemeData ? "BULUTU GÜNCELLE" : "BULUTA YÜKLE"}
+          {data ? "BULUTU GÜNCELLE" : "BULUTA YÜKLE"}
         </Button>
 
         <Button
