@@ -20,8 +20,15 @@ import { ToastContainer, toast,Bounce } from "react-toastify";
 import DownloadExcel from "./DownloadExcel";
 import addNewData from "./SetDatabase";
 import dayjs from "dayjs";
+import updateDatabase from "./UpdateDatabase";
 
-const DynamicForm = ({ müsteriIsmi ,data,olusturmaTarihi,isNumarası}) => {
+const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}) => {
+
+  // console.log(müsteriIsmi,data,olusturmaTarihi,isNumarası)
+
+  console.log("DynamicForm data is :")
+  console.log(data)
+  
   const { control, handleSubmit, getValues, setValue } = useForm();
   const [rows, setRows] = useState([{ id: 0 }]);
 
@@ -88,13 +95,13 @@ const DynamicForm = ({ müsteriIsmi ,data,olusturmaTarihi,isNumarası}) => {
     }, 0);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (dataX) => {
     const formattedData = rows.map((row) => {
       const rowData = {};
-      Object.keys(data).forEach((key) => {
+      Object.keys(dataX).forEach((key) => {
         if (key.includes(`-${row.id}`)) {
           const newKey = key.replace(`-${row.id}`, ""); // Örneğin, "kat-0" -> "kat"
-          rowData[newKey] = data[key];
+          rowData[newKey] = dataX[key];
         }
       });
       return rowData;
@@ -104,28 +111,28 @@ const DynamicForm = ({ müsteriIsmi ,data,olusturmaTarihi,isNumarası}) => {
     DownloadExcel(formattedData, müsteriIsmi);
   };
 
-  const CloudDownload = (data) => {
+  const CloudDownload = (dataX) => {
     const formattedData = rows.map((row) => {
       const rowData = {};
-      Object.keys(data).forEach((key) => {
+      Object.keys(dataX).forEach((key) => {
         if (key.includes(`-${row.id}`)) {
           const newKey = key.replace(`-${row.id}`, ""); // Örneğin, "kat-0" -> "kat"
-          rowData[newKey] = data[key];
+          rowData[newKey] = dataX[key];
         }
       });
       return rowData;
     });
 
-    // const lastRowData = getValues();
-    // console.log(lastRowData)
-    // console.log(formattedData) 
-
-
     // console.log(data)
-    // console.log(rows)
+
+    if(data){
+      updateDatabase(formattedData,müsteriIsmi,olusturmaTarihi,isNumarası,notifySuccess,notifyError,databaseId)
+    }else{
+      addNewData(formattedData,müsteriIsmi,dayjs(olusturmaTarihi).format('DD/MM/YYYY'),isNumarası,notifySuccess,notifyError)
+    }
 
 
-    addNewData(formattedData,müsteriIsmi,dayjs(olusturmaTarihi).format('DD/MM/YYYY'),isNumarası,notifySuccess,notifyError)
+    
 
     // console.log(dayjs(olusturmaTarihi).format('DD/MM/YYYY'))
 
