@@ -19,8 +19,9 @@ import { ToastContainer, toast,Bounce } from "react-toastify";
 // import DownloadData from "./DownloadData";
 import DownloadExcel from "./DownloadExcel";
 import addNewData from "./SetDatabase";
+import dayjs from "dayjs";
 
-const DynamicForm = ({ müsteriIsmi ,denemeData}) => {
+const DynamicForm = ({ müsteriIsmi ,denemeData,olusturmaTarihi,isNumarası}) => {
   const { control, handleSubmit, getValues, setValue } = useForm();
   const [rows, setRows] = useState([{ id: 0 }]);
 
@@ -115,16 +116,18 @@ const DynamicForm = ({ müsteriIsmi ,denemeData}) => {
       return rowData;
     });
 
-    const lastRowData = getValues();
+    // const lastRowData = getValues();
     // console.log(lastRowData)
     // console.log(formattedData) 
 
 
-    console.log(denemeData)
-    console.log(rows)
+    // console.log(denemeData)
+    // console.log(rows)
 
 
-    // addNewData(formattedData,notifySuccess,notifyError)
+    addNewData(formattedData,müsteriIsmi,dayjs(olusturmaTarihi).format('DD/MM/YYYY'),isNumarası,notifySuccess,notifyError)
+
+    // console.log(dayjs(olusturmaTarihi).format('DD/MM/YYYY'))
 
 
   };

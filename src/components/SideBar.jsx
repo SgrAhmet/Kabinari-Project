@@ -23,7 +23,7 @@ const SideBar = ({open,toggleDrawer}) => {
   const navigate = useNavigate();
 
   const handleNavigation = (index) => {
-    const routes = ["/Yeni-Proje", "/", "/  "];
+    const routes = ["/Yeni-Proje", "/Tüm-Projeler", "/*"];
     navigate(routes[index]);
   };
 

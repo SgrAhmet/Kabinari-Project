@@ -31,12 +31,16 @@ import SideBar from "../components/SideBar";
 import Navbar from "../components/Navbar";
 import StyleFormRow from "../components/StyleFormRow";
 import DynamicForm from "../components/DynamicForm";
+import srcBg from"../imgs/cool-background2.png"
+
 
 const YeniProjePage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [selected, setSelected] = useState(false);
 
   const [müsteriIsmi, setmüsteriIsmi] = useState("");
+  const [isNumarası, setIsNumarası] = useState("")
+  const [olusturmaTarihi, setOlusturmaTarihi] = useState("")
 
   const theme = createTheme({
     palette: {
@@ -70,36 +74,6 @@ const YeniProjePage = () => {
   const [newRows, setNewRows] = useState([
     <StyleFormRow key={0} id={0} onChange={handleRowChange} />,
   ]);
-
-  const handleExelBtn = () => {
-    console.log("Form Verileri:", formDataList);
-  };
-
-  const handleNewRowBtn = () => {
-    setNewRows((oldArray) => [
-      ...oldArray,
-      <StyleFormRow
-        key={newRows.length}
-        id={newRows.length}
-        onChange={handleRowChange}
-      />,
-    ]);
-    setFormDataList((prevList) => [...prevList, {}]); // Yeni satır için boş bir nesne ekle.
-  };
-
-  const handleSameRowBtn = () => {
-    const lastRowData = formDataList[formDataList.length - 1] || {}; // Son satırın verisini al.
-    setNewRows((oldArray) => [
-      ...oldArray,
-      <StyleFormRow
-        key={newRows.length}
-        id={newRows.length}
-        data={lastRowData}
-        onChange={handleRowChange}
-      />,
-    ]);
-    setFormDataList((prevList) => [...prevList, lastRowData]); // Yeni satıra son satırın verilerini ekle.
-  };
 
   //! =================================================
 
@@ -186,6 +160,11 @@ const YeniProjePage = () => {
         <Box
           sx={{
             backgroundColor: "#DEDDDB",
+            // backgroundColor:"red",
+            // backgroundImage: `url(${srcBg})`,
+            // backgroundSize: "cover",
+            // backgroundPosition: "center",
+            // backgroundRepeat: "no-repeat",
             width: "100%",
             minHeight: "90vh",
           }}
@@ -250,6 +229,7 @@ const YeniProjePage = () => {
                 id="outlined-basic"
                 variant="outlined"
                 size="small"
+                inputProps={{ autoComplete: "off" }}
                 value={müsteriIsmi}
                 onChange={(e) => {
                   setmüsteriIsmi(e.target.value);
@@ -294,6 +274,11 @@ const YeniProjePage = () => {
                 id="outlined-basic"
                 variant="outlined"
                 size="small"
+                inputProps={{ autoComplete: "off" }}
+                value={isNumarası}
+                onChange={(e) => {
+                  setIsNumarası(e.target.value);
+                }}
               />
 
               <Box height={"50px"} width={"95px"}></Box>
@@ -321,6 +306,7 @@ const YeniProjePage = () => {
                   display={"flex"}
                   alignItems={"center"}
                   marginX={"10px"}
+                  
                 >
                   Oluşturma Tarihi
                 </Typography>
@@ -331,10 +317,12 @@ const YeniProjePage = () => {
                   format="DD/MM/YYYY"
                   sx={{ width: "60%" }}
                   slotProps={{ textField: { size: "small" } }}
-
+                  
                   // label="Oluşturma Tarihi"
-                  // value={value}
-                  // onChange={(newValue) => setValue(newValue)}
+                  // value={olusturmaTarihi}
+                  onChange={(newValue) => setOlusturmaTarihi(newValue)
+                  
+                }
                 />
               </LocalizationProvider>
 
@@ -347,11 +335,11 @@ const YeniProjePage = () => {
 
             <Box
               sx={{
-                width: "100%",
+                width: "100%",  
                 // border:"3px solid black"
               }}
             >
-              <DynamicForm müsteriIsmi={müsteriIsmi} denemeData={denemeData} />
+              <DynamicForm müsteriIsmi={müsteriIsmi} denemeData={denemeData} olusturmaTarihi={olusturmaTarihi} isNumarası={isNumarası}/>
               {/* <DynamicForm müsteriIsmi={müsteriIsmi}  /> */}
             </Box>
           </Box>

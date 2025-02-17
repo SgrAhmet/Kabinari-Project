@@ -15,7 +15,12 @@ import {
 } from "@mui/material";
 import logo from "../imgs/logo2.png";
 import src from "../imgs/undraw_data-trends_kv5v.svg"
+
 import srcBg from"../imgs/cool-background2.png"
+
+
+
+
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();

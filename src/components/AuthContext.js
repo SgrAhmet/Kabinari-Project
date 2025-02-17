@@ -13,6 +13,9 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);  //! False Olarak Değiştir
     const [password, setPassword] = useState("")
+
+
+
   const login = (passwordField) => {
 
 
