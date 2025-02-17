@@ -34,7 +34,7 @@ const SideBar = ({open,toggleDrawer}) => {
               sx={{ borderBottomWidth: 3, backgroundColor: "#DEDDDB" }}
             />
           <List>
-            {['Yeni Proje', 'Tüm Projeler', 'Son Proje'].map((text, index) => (
+            {['Yeni Proje', 'Tüm Projeler'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton onClick={()=>handleNavigation(index)}>
                   <ListItemIcon>
@@ -46,7 +46,7 @@ const SideBar = ({open,toggleDrawer}) => {
             ))}
           </List>
           <Divider />
-          <List>
+          {/* <List>
             {['Alimünyum Kasa Projeleri', 'Kabin Projeleri'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
@@ -57,8 +57,7 @@ const SideBar = ({open,toggleDrawer}) => {
                 </ListItemButton>
               </ListItem>
             ))}
-          </List>
-          <Link to="/firebase">Firebase</Link>
+          </List> */}
         </Box>
       );
   return (

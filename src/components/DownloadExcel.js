@@ -46,6 +46,9 @@ const DownloadExcel = (data, müsteriIsmi) => {
   extrasCheck.yangınaD && howMuchExtras++;
 
   const createAndSaveExcel = async () => {
+
+
+
     // Yeni bir Excel Çalışma Kitabı oluştur
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet(
@@ -200,21 +203,21 @@ const DownloadExcel = (data, müsteriIsmi) => {
     data.forEach((singleData, i) => {
       const row = [
         i + 1,
-        singleData.tip,
-        singleData.kat,
-        singleData.mahalNo,
-        singleData.mahal,
+        singleData.tip.toUpperCase(),
+        singleData.kat.toUpperCase(),
+        singleData.mahalNo.toUpperCase(),
+        singleData.mahal.toUpperCase(),
         Number(singleData.en),
         Number(singleData.boy),
         Number(singleData.duvarKalinligi),
         1,
-        singleData.yon,
-        singleData.kanat,
-        singleData.kasa,
-        singleData.barel,
-        singleData.kilit,
-        singleData.cumba,
-        singleData.kol,
+        singleData.yon.toUpperCase(),
+        singleData.kanat.toUpperCase(),
+        singleData.kasa.toUpperCase(),
+        singleData.barel.toUpperCase(),
+        singleData.kilit.toUpperCase(),
+        singleData.cumba.toUpperCase(),
+        singleData.kol.toUpperCase(),
       ];
 
       console.log("extrasCheck", extrasCheck);
@@ -260,7 +263,7 @@ const DownloadExcel = (data, müsteriIsmi) => {
       { width: 10 }, // KANAT
       { width: 10 }, // KASA
       { width: 10 }, // BAREL
-      { width: 10 }, // KİLİT
+      { width: 13 }, // KİLİT
       { width: 10 }, // CUMBA
       { width: 10 }, // KOL
       { width: 5 }, // TEKMELİK
@@ -400,7 +403,7 @@ const DownloadExcel = (data, müsteriIsmi) => {
       { width: 10 },
       { width: 10 },
       { width: 15 },
-      { width: 10 },
+      { width: 15 },
       { width: 10 },
       { width: 10 },
       { width: 10 },
@@ -472,18 +475,19 @@ const DownloadExcel = (data, müsteriIsmi) => {
           break;
       }
 
+     
       const row = [
         i + 1,
-        singleData.tip,
-        singleData.kat,
-        singleData.mahalNo,
-        singleData.mahal,
+        singleData.tip.toUpperCase(),
+        singleData.kat.toUpperCase(),
+        singleData.mahalNo.toUpperCase(),
+        singleData.mahal.toUpperCase(),
         Number(singleData.en)+4.4,
         Number(singleData.boy-0.3),
         Number(singleData.duvarKalinligi),
         1,
-        singleData.yon,
-        singleData.kasa, // Renk
+        singleData.yon.toUpperCase(),
+        singleData.kasa.toUpperCase(), // Renk
         kasa, // Kasa
         pervaz,
         ek,
@@ -494,7 +498,6 @@ const DownloadExcel = (data, müsteriIsmi) => {
 
       // Satır yüksekliğini ayarlama (örneğin, 25 piksel yapalım)
       addedRow.height = 25;
-
       // addedRow.eachCell((cell) => {
       //   cell.font = { bold: true, size: 16 };
       // });
@@ -583,12 +586,12 @@ const DownloadExcel = (data, müsteriIsmi) => {
     worksheet3.columns = [
       { width: 5 },
       { width: 10 },
+      { width: 15 },
       { width: 10 },
       { width: 10 },
       { width: 10 },
       { width: 10 },
-      { width: 10 },
-      { width: 10 },
+      { width: 15 },
       { width: 15 },
       { width: 15 },
       { width: 10 },
@@ -597,16 +600,16 @@ const DownloadExcel = (data, müsteriIsmi) => {
     data.forEach((singleData, i) => {
       const row = [
         i + 1,
-        singleData.tip,
-        singleData.mahal,
+        singleData.tip.toUpperCase(),
+        singleData.mahal.toUpperCase(),
         singleData.cumba =="pvc" ? Number(singleData.en -7.9) : Number(singleData.en -8.1) ,
         Number(singleData.boy - 6),
         Number(singleData.duvarKalinligi),
         1,
-        singleData.kilit,
-        singleData.kanat,
-        "???",
-        singleData.cumba,
+        singleData.kilit.toUpperCase(),
+        singleData.kanat.toUpperCase(),
+        "???".toUpperCase(),
+        singleData.cumba.toUpperCase(),
       ];
 
       let addedRow = worksheet3.addRow(row);
@@ -633,6 +636,8 @@ const DownloadExcel = (data, müsteriIsmi) => {
       `${müsteriIsmi === "" ? "Project" : müsteriIsmi}.xlsx`
     );
   };
+
+
 
   createAndSaveExcel();
 };
