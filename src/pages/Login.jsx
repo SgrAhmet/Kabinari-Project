@@ -15,8 +15,8 @@ import {
 } from "@mui/material";
 import logo from "../imgs/logo2.png";
 import src from "../imgs/undraw_data-trends_kv5v.svg"
-
 import srcBg from"../imgs/cool-background2.png"
+import { ToastContainer, toast, Bounce } from "react-toastify";
 
 
 
@@ -26,10 +26,24 @@ const Login = () => {
   const navigate = useNavigate();
   const [passwordField, setPasswordField] = useState("");
 
+
+const notifyError = () =>
+  toast.error("Şifre Hatalı", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    transition: Bounce,
+  });
+
   const handleLogin = () => {
     // Giriş işlemi başarılı olduğunda
-    login(passwordField);
-    navigate("/Yeni-Proje"); // veya başka bir sayfaya yönlendirme
+    login(passwordField,notifyError);
+    // navigate("/Yeni-Proje"); // veya başka bir sayfaya yönlendirme
   };
 
   const handleChange = (e) => {
@@ -56,8 +70,20 @@ const Login = () => {
 
       }}
     >
+   <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
 
-{/* <img src={src} alt="asd" /> */}
       <Box
         sx={{
           // backgroundColor: "#ff#ffffffef",

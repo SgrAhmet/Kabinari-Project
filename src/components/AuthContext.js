@@ -1,45 +1,39 @@
-import React, { createContext,useEffect, useState } from 'react';
-
-import {
-    collection,
-    getDocs,
-    addDoc,
-    doc,
-  } from "firebase/firestore";
-import { db } from '../firebaseConfig';
+import React, { createContext, useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);  //! False Olarak Değiştir
-    const [password, setPassword] = useState("")
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // ❗ useNavigate burada tanımlandı
 
-
-
-  const login = (passwordField) => {
-
-
+  useEffect(() => {
     const fetchData = async () => {
-        try {
-          const querySnapshot = await getDocs(collection(db, "Password"));
-          const data = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-        //   console.log(data[0].password);
-          setPassword(data[0].password)
-        } catch (error) {
-          console.error("Error fetching data: ", error);
-        }
-      };
-        fetchData()
-    //   console.log("sadsadsa"+ passwordField)
-
-      if(passwordField == password){
-        setIsAuthenticated(true);
-      }else{
-        console.warn("Şifre Hatalı")
+      try {
+        const querySnapshot = await getDocs(collection(db, "Password"));
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPassword(data[0]?.password || ""); // Veri varsa password al, yoksa boş string ata
+      } catch (error) {
+        console.error("Error fetching data: ", error);
       }
+    };
+    fetchData();
+  }, []); // ❗ useEffect içinde veriyi çekiyoruz
+
+  const login = (passwordField,notifyError) => {
+    if (passwordField === password) {
+      setIsAuthenticated(true);
+      navigate("/Yeni-Proje");
+    } else {
+      // console.warn("Şifre Hatalı");
+      notifyError()
+    }
   };
 
   const logout = () => {

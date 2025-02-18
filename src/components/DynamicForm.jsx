@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   TextField,
@@ -15,61 +15,68 @@ import AddIcon from "@mui/icons-material/Add";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
-import { ToastContainer, toast,Bounce } from "react-toastify";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { ToastContainer, toast, Bounce } from "react-toastify";
 // import DownloadData from "./DownloadData";
 import DownloadExcel from "./DownloadExcel";
 import addNewData from "./SetDatabase";
 import dayjs from "dayjs";
 import updateDatabase from "./UpdateDatabase";
 
-const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}) => {
-
+const DynamicForm = ({
+  müsteriIsmi,
+  data,
+  olusturmaTarihi,
+  isNumarası,
+  databaseId,
+}) => {
   // console.log(müsteriIsmi,data,olusturmaTarihi,isNumarası)
 
-  console.log("DynamicForm data is :")
-  console.log(data)
-  
-  const { control, handleSubmit, getValues, setValue } = useForm();
+  // console.log("DynamicForm data is :");
+  // console.log(data);
+
+  const { control, handleSubmit, getValues, setValue,reset } = useForm();
   const [rows, setRows] = useState([{ id: 0 }]);
 
-  const notifySuccess = () => toast.success('Buluta Yüklendi', {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: false,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    transition: Bounce,
-    });
-    
-  const notifyError= () => toast.error('Buluta Yüklenirken Bir Hata Oluştu', {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: false,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    transition: Bounce,
+  const notifySuccess = () =>
+    toast.success("Buluta Yüklendi", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
     });
 
-    const controlInbound = () => {
-      setRows(prevRows => {
-          const newRows = [...prevRows]; // Önceki state'i kopyala
-          for (let i = 1; i < data.length; i++) {
-              newRows.push({ id: i }); // Yeni elemanları ekle
-          }
-          return newRows; // Güncellenmiş array'i döndür
-      });
+  const notifyError = () =>
+    toast.error("Buluta Yüklenirken Bir Hata Oluştu", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
+
+  const controlInbound = () => {
+    setRows((prevRows) => {
+      const newRows = [...prevRows]; // Önceki state'i kopyala
+      for (let i = 1; i < data.length; i++) {
+        newRows.push({ id: i }); // Yeni elemanları ekle
+      }
+      return newRows; // Güncellenmiş array'i döndür
+    });
   };
-  
-  useEffect(() => {
-      data && controlInbound() 
-  }, []);
 
+  useEffect(() => {
+    data && controlInbound();
+  }, []);
 
   const addRow = () => {
     const newRow = { id: rows.length };
@@ -107,8 +114,13 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
       return rowData;
     });
 
-    // DownloadData(formattedData,müsteriIsmi)
+    //! Sil DownloadData(formattedData,müsteriIsmi)
     DownloadExcel(formattedData, müsteriIsmi);
+
+
+    // console.log("formattedData")
+    // console.log(formattedData)
+
   };
 
   const CloudDownload = (dataX) => {
@@ -125,18 +137,28 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
 
     // console.log(data)
 
-    if(data){
-      updateDatabase(formattedData,müsteriIsmi,olusturmaTarihi,isNumarası,notifySuccess,notifyError,databaseId)
-    }else{
-      addNewData(formattedData,müsteriIsmi,dayjs(olusturmaTarihi).format('DD/MM/YYYY'),isNumarası,notifySuccess,notifyError)
+    if (data) {
+      updateDatabase(
+        formattedData,
+        müsteriIsmi,
+        olusturmaTarihi,
+        isNumarası,
+        notifySuccess,
+        notifyError,
+        databaseId
+      );
+    } else {
+      addNewData(
+        formattedData,
+        müsteriIsmi,
+        dayjs(olusturmaTarihi).format("DD/MM/YYYY"),
+        isNumarası,
+        notifySuccess,
+        notifyError
+      );
     }
 
-
-    
-
     // console.log(dayjs(olusturmaTarihi).format('DD/MM/YYYY'))
-
-
   };
 
   // Sütun başlıkları
@@ -162,6 +184,31 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
     "Lumboz",
     "Yangına D.",
   ];
+
+
+
+  // ========================================
+
+  const deleteLastRow =(dataX)=>{
+    if (rows.length === 0) return;
+
+    const lastRowId = rows[rows.length - 1].id; // Son satırın ID'sini al
+  
+    // Son satıra ait olanları filtrele
+    const filteredObj = Object.keys(dataX)
+      .filter(key => !key.endsWith(`-${lastRowId}`)) // Son satırın verilerini kaldır
+      .reduce((acc, key) => {
+        acc[key] = dataX[key];
+        return acc;
+      }, {});
+  
+    // Tüm formu yeni değerlerle sıfırla
+    reset(filteredObj); 
+  
+    // Son satırı sil
+    setRows(rows.slice(0, -1));
+
+  }
 
   return (
     <Box
@@ -210,9 +257,8 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
 
       {/* Form Satırları */}
       {rows.map((row) => (
-        
         <Box key={row.id} sx={{ display: "flex", gap: 1, marginBottom: 1 }}>
-        {/* <Typography>{row.id + 1}</Typography> */}
+          {/* <Typography>{row.id + 1}</Typography> */}
 
           <Controller
             name={`kat-${row.id}`}
@@ -245,7 +291,9 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           <Controller
             name={`mahalNo-${row.id}`}
             control={control}
-            defaultValue={data && data[row.id]?.mahalNo ? data[row.id].mahalNo : ""}
+            defaultValue={
+              data && data[row.id]?.mahalNo ? data[row.id].mahalNo : ""
+            }
             render={({ field }) => (
               <TextField
                 {...field}
@@ -301,7 +349,11 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           <Controller
             name={`duvarKalinligi-${row.id}`}
             control={control}
-            defaultValue={data && data[row.id]?.duvarKalinligi ? data[row.id].duvarKalinligi : ""}
+            defaultValue={
+              data && data[row.id]?.duvarKalinligi
+                ? data[row.id].duvarKalinligi
+                : ""
+            }
             render={({ field }) => (
               <TextField
                 {...field}
@@ -417,7 +469,9 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           <Controller
             name={`tekmelik-${row.id}`}
             control={control}
-            defaultValue={data && data[row.id]?.tekmelik ? data[row.id].tekmelik : false}
+            defaultValue={
+              data && data[row.id]?.tekmelik ? data[row.id].tekmelik : false
+            }
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -425,7 +479,9 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           <Controller
             name={`itmelik-${row.id}`}
             control={control}
-            defaultValue={data && data[row.id]?.itmelik ? data[row.id].itmelik : false}
+            defaultValue={
+              data && data[row.id]?.itmelik ? data[row.id].itmelik : false
+            }
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -433,7 +489,9 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           <Controller
             name={`menfez-${row.id}`}
             control={control}
-            defaultValue={data && data[row.id]?.menfez ? data[row.id].menfez : false}
+            defaultValue={
+              data && data[row.id]?.menfez ? data[row.id].menfez : false
+            }
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -441,7 +499,9 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           <Controller
             name={`hidrolik-${row.id}`}
             control={control}
-            defaultValue={data && data[row.id]?.hidrolik ? data[row.id].hidrolik : false}
+            defaultValue={
+              data && data[row.id]?.hidrolik ? data[row.id].hidrolik : false
+            }
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -449,7 +509,9 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           <Controller
             name={`lumboz-${row.id}`}
             control={control}
-            defaultValue={data && data[row.id]?.lumboz ? data[row.id].lumboz : false}
+            defaultValue={
+              data && data[row.id]?.lumboz ? data[row.id].lumboz : false
+            }
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -457,7 +519,9 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           <Controller
             name={`yangınaD-${row.id}`}
             control={control}
-            defaultValue={data && data[row.id]?.yangınaD ? data[row.id].yangınaD : false}
+            defaultValue={
+              data && data[row.id]?.yangınaD ? data[row.id].yangınaD : false
+            }
             render={({ field }) => (
               <Checkbox {...field} checked={field.value} />
             )}
@@ -466,6 +530,7 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
       ))}
 
       {/* Butonlar */}
+
       <Box
         sx={{
           display: "flex",
@@ -473,7 +538,20 @@ const DynamicForm = ({ müsteriIsmi,data,olusturmaTarihi,isNumarası,databaseId}
           marginTop: 2,
           justifyContent: "flex-end",
         }}
-      >
+      > 
+        <Button
+          variant="contained"
+          // onClick={deleteLastRow}
+          onClick={handleSubmit(deleteLastRow)}
+          startIcon={<DeleteIcon />}
+          sx={{
+            backgroundColor: "#c20000",
+            "&:hover": { backgroundColor: "#9f0000" },
+          }}
+        >
+          Son Satırı Sil
+        </Button>
+
         <Button
           variant="contained"
           onClick={addRow}

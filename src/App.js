@@ -1,11 +1,5 @@
 import "./App.css";
-//  import MyButton from './components/MyButton';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import YeniProjePage from "./pages/YeniProjePage";
 import FirebaseDeneme from "./pages/FirebaseDeneme";
@@ -19,8 +13,8 @@ import ExistentProject from "./pages/ExistentProject";
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <Router> {/* Sadece burada kullanılıyor */}
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/Yeni-Proje" element={<PrivateRoute element={YeniProjePage} />} />
@@ -30,8 +24,8 @@ function App() {
           <Route path="/firebase" element={<PrivateRoute element={FirebaseDeneme} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 
