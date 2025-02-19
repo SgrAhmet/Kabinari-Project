@@ -92,17 +92,11 @@ const AllProjects = () => {
         >
           {gelenVeriler.length > 0 ? (
             gelenVeriler.map((data) => (
-              <>
-                {/* <Link key={data.id}>{data.id || "Bilinmeyen Veri"}</Link> */}
-                {/* <DynamicForm müsteriIsmi={"müsteriIsmi"} denemeData={data.data} /> */}
-
                 <AllProjectsListItem
                   key={data.id}
                   data={data}
                   fetchData={fetchData}
                 />
-
-              </>
             ))
           ) : (
             <Typography color="#1C3960">Yükleniyor...</Typography>

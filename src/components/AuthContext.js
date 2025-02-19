@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isAuthenticated") === "true"
+  );
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // ❗ useNavigate burada tanımlandı
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,26 +20,27 @@ export const AuthProvider = ({ children }) => {
           id: doc.id,
           ...doc.data(),
         }));
-        setPassword(data[0]?.password || ""); // Veri varsa password al, yoksa boş string ata
+        setPassword(data[0]?.password || "");
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
     fetchData();
-  }, []); // ❗ useEffect içinde veriyi çekiyoruz
+  }, []);
 
-  const login = (passwordField,notifyError) => {
+  const login = (passwordField, notifyError) => {
     if (passwordField === password) {
       setIsAuthenticated(true);
+      localStorage.setItem("isAuthenticated", "true"); // Oturum durumunu localStorage'a kaydet
       navigate("/Yeni-Proje");
     } else {
-      // console.warn("Şifre Hatalı");
-      notifyError()
+      notifyError();
     }
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem("isAuthenticated"); // Oturum durumunu localStorage'dan kaldır
   };
 
   return (

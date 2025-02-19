@@ -207,6 +207,9 @@ const DynamicForm = ({
   
     // Son satırı sil
     setRows(rows.slice(0, -1));
+    
+    data.pop()
+    // console.log(data)
 
   }
 

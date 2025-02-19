@@ -153,6 +153,7 @@ const YeniProjePage = () => {
           width: "100%",
           height: "100vh",
           // width:"100vw"
+          // bgcolor:"red"
         }}
       >
         <Navbar toggleDrawer={toggleDrawer} />
@@ -160,6 +161,7 @@ const YeniProjePage = () => {
         <Box
           sx={{
             backgroundColor: "#DEDDDB",
+            // backgroundColor: "red",
             // backgroundColor:"red",
             // backgroundImage: `url(${srcBg})`,
             // backgroundSize: "cover",
