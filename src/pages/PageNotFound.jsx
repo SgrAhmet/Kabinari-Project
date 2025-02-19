@@ -22,8 +22,8 @@ const PageNotFound = () => {
 
   return (
     <div style={{height : "100vh"}}>
-
-<iframe src='https://my.spline.design/3dtextcopy-b903c7dc213d1f5253767dda568a9192/' frameborder='0' width='100%' height='100%'></iframe>
+        <p>Page Not Found</p>
+{/* <iframe src='https://my.spline.design/3dtextcopy-b903c7dc213d1f5253767dda568a9192/' frameborder='0' width='100%' height='100%'></iframe> */}
   </div>
   )
 }
