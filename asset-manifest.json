@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/Kabinari-Project/static/css/main.c2fd9552.css",
+    "main.js": "/Kabinari-Project/static/js/main.8aaba493.js",
+    "static/js/208.f7b9fe66.chunk.js": "/Kabinari-Project/static/js/208.f7b9fe66.chunk.js",
+    "static/js/293.14d556f8.chunk.js": "/Kabinari-Project/static/js/293.14d556f8.chunk.js",
+    "static/js/917.940713f2.chunk.js": "/Kabinari-Project/static/js/917.940713f2.chunk.js",
+    "static/js/516.e8fd21e3.chunk.js": "/Kabinari-Project/static/js/516.e8fd21e3.chunk.js",
+    "static/js/519.c34c974b.chunk.js": "/Kabinari-Project/static/js/519.c34c974b.chunk.js",
+    "static/js/946.7049bdf8.chunk.js": "/Kabinari-Project/static/js/946.7049bdf8.chunk.js",
+    "static/js/160.06353a74.chunk.js": "/Kabinari-Project/static/js/160.06353a74.chunk.js",
+    "static/js/23.e56de92a.chunk.js": "/Kabinari-Project/static/js/23.e56de92a.chunk.js",
+    "static/media/cool-background2.png": "/Kabinari-Project/static/media/cool-background2.cb9021bb1ff804471906.png",
+    "static/media/undraw_data-trends_kv5v.svg": "/Kabinari-Project/static/media/undraw_data-trends_kv5v.d1803933f2956749a3d2f5a402b14d1c.svg",
+    "static/media/logo2.png": "/Kabinari-Project/static/media/logo2.0f773baf197aee1f9000.png",
+    "index.html": "/Kabinari-Project/index.html",
+    "main.c2fd9552.css.map": "/Kabinari-Project/static/css/main.c2fd9552.css.map",
+    "main.8aaba493.js.map": "/Kabinari-Project/static/js/main.8aaba493.js.map",
+    "208.f7b9fe66.chunk.js.map": "/Kabinari-Project/static/js/208.f7b9fe66.chunk.js.map",
+    "293.14d556f8.chunk.js.map": "/Kabinari-Project/static/js/293.14d556f8.chunk.js.map",
+    "917.940713f2.chunk.js.map": "/Kabinari-Project/static/js/917.940713f2.chunk.js.map",
+    "516.e8fd21e3.chunk.js.map": "/Kabinari-Project/static/js/516.e8fd21e3.chunk.js.map",
+    "519.c34c974b.chunk.js.map": "/Kabinari-Project/static/js/519.c34c974b.chunk.js.map",
+    "946.7049bdf8.chunk.js.map": "/Kabinari-Project/static/js/946.7049bdf8.chunk.js.map",
+    "160.06353a74.chunk.js.map": "/Kabinari-Project/static/js/160.06353a74.chunk.js.map",
+    "23.e56de92a.chunk.js.map": "/Kabinari-Project/static/js/23.e56de92a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c2fd9552.css",
+    "static/js/main.8aaba493.js"
+  ]
+}
