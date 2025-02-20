@@ -70,7 +70,7 @@ const FirebaseDeneme = () => {
     // }
 
 
-    console.log("denemeeee")
+    // console.log("denemeeee")
 
 
 
@@ -78,7 +78,7 @@ const FirebaseDeneme = () => {
 
 
   const denemeFunc=()=>{
-    console.log("ahmet")
+    // console.log("ahmet")
   }
 
   
@@ -110,7 +110,7 @@ const FirebaseDeneme = () => {
   sx={{ backgroundColor: "#665B59", width: "10%" }}
   variant="contained"
   onClick={() => {
-    console.log("Button clicked!");
+    // console.log("Button clicked!");
     denemeFunc();
   }}
 >

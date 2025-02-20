@@ -45,9 +45,9 @@ const AllProjects = () => {
         ...doc.data(),
       }));
       setGelenVeriler(data);
-      console.log(data);
+      // console.log(data);
 
-      console.log(gelenVeriler);
+      // console.log(gelenVeriler);
     } catch (error) {
       console.error("Error fetching data: ", error);
     }

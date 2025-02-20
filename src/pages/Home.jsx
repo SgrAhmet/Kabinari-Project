@@ -7,7 +7,7 @@ const Home = () => {
   const [rows, setRows] = useState([0]);
 
   const handleExelBtn = () => {
-    console.log("Form Verileri:", formDataList);
+    // console.log("Form Verileri:", formDataList);
   };
 
   const handleNewRowBtn = () => {
@@ -38,8 +38,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log("Rows:", rows);
-    console.log("Form Data List:", formDataList);
+    // console.log("Rows:", rows);
+    // console.log("Form Data List:", formDataList);
   }, [rows, formDataList]);
 
   return (

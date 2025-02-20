@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 const MyButton = ({name,consoleLog}) => {
 
     const handleButton =()=>{
-        console.log(consoleLog)
+        // console.log(consoleLog)
     }
 
   return (

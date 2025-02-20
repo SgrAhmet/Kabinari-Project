@@ -220,7 +220,7 @@ const DownloadExcel = (data, müsteriIsmi) => {
         singleData.kol.toUpperCase(),
       ];
 
-      console.log("extrasCheck", extrasCheck);
+      // console.log("extrasCheck", extrasCheck);
       extrasCheck.tekmelik && row.push(singleData.tekmelik == true ? "✔️" : "");
       extrasCheck.itmelik && row.push(singleData.itmelik == true ? "✔️" : "");
       extrasCheck.menfez && row.push(singleData.menfez == true ? "✔️" : "");
